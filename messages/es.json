@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "title": "Bamboo Money — Tu dinero, creciendo.",
+    "description": "Bamboo Money reúne tus gastos, suscripciones y patrimonio neto en un espacio inteligente y tranquilo — para que puedas enfocarte en construir la vida que deseas."
+  },
+
+  "nav": {
+    "today": "Hoy",
+    "envelopes": "Sobres",
+    "goals": "Metas",
+    "askBamboo": "Pregunta a Bamboo",
+    "settings": "Ajustes",
+    "darkMode": "Modo Oscuro",
+    "lightMode": "Modo Claro",
+    "openApp": "Abrir App",
+    "joinWaitlist": "Únete a la lista"
+  },
+
+  "landing": {
+    "brand": "Bamboo Money",
+    "hero": {
+      "headline1": "Tu dinero,",
+      "headline2": "creciendo.",
+      "subheadline": "Bamboo Money reúne tus gastos, suscripciones y patrimonio neto en un espacio inteligente y tranquilo — para que puedas enfocarte en construir la vida que deseas.",
+      "ctaPrimary": "Obtén acceso anticipado",
+      "ctaSecondary": "Mira cómo funciona",
+      "ctaNote": "Gratis para empezar. Premium por $4.17/mes."
+    },
+    "problem": {
+      "label": "El problema",
+      "headline": "Manejar dinero no debería sentirse así.",
+      "items": {
+        "budgeting": {
+          "title": "Presupuestar se siente como tarea",
+          "body": "El 60% de los usuarios abandonan las apps de presupuesto en 90 días. Las herramientas exigen demasiado trabajo para muy poco resultado."
+        },
+        "dashboards": {
+          "title": "Los dashboards muestran todo pero no cambian nada",
+          "body": "Saber que gastaste $847 en restaurantes el mes pasado no te ayuda a gastar menos este mes. Información sin acción es solo ruido."
+        },
+        "fragmented": {
+          "title": "Cinco apps diferentes para una sola vida financiera",
+          "body": "Presupuesto en una app, suscripciones en otra, patrimonio en una tercera. Tu panorama financiero está disperso en herramientas que no se comunican."
+        }
+      },
+      "bridge": "Hay una mejor manera."
+    },
+    "pillars": {
+      "label": "Cómo funciona",
+      "headline": "Una app. Tres pilares. Tu panorama financiero completo.",
+      "envelopes": {
+        "title": "Sobres",
+        "body": "Sabe exactamente cuánto te queda por gastar — en tiempo real, para cada categoría. No al final del mes. Ahora mismo."
+      },
+      "subscriptions": {
+        "title": "Suscripciones",
+        "body": "Cada cargo recurrente, detectado y rastreado. Ve lo que pagas, lo que no usas, y lo que ese dinero podría hacer en su lugar."
+      },
+      "netWorth": {
+        "title": "Patrimonio Neto",
+        "body": "Todas tus cuentas — corriente, ahorro, inversiones, deuda — en un solo número tranquilo que crece con el tiempo."
+      },
+      "bridge": "Y un asistente inteligente que conecta todo."
+    },
+    "assistant": {
+      "label": "Conoce a Bamboo",
+      "headline": "No es un chatbot. Es inteligencia integrada en todo.",
+      "description": "Bamboo observa tus patrones financieros y entrega información útil que puedes usar — con calma, específica y basada en tus datos reales.",
+      "insights": [
+        "Tu sobre de supermercado tiene $62 restantes esta semana. Los meses anteriores muestran que aquí es donde aumentan los gastos — buen momento para planificar.",
+        "Tres suscripciones no se han usado en más de 60 días. Cancelar las tres agrega $912/año a tu fondo de viajes.",
+        "Tu patrimonio neto ha crecido $2,340 en los últimos 90 días. A este ritmo, alcanzarás tu meta de $50K en noviembre."
+      ]
+    },
+    "competitive": {
+      "label": "Por qué Bamboo",
+      "headline": "Construido diferente.",
+      "vsYnab": {
+        "label": "vs. YNAB",
+        "text": "YNAB le da a cada dólar un trabajo. Bamboo les da trabajos a tus dólares por ti — basado en la vida que nos dijiste que quieres."
+      },
+      "vsMonarch": {
+        "label": "vs. Monarch",
+        "text": "Monarch te muestra todo. Bamboo te muestra qué hacer al respecto."
+      },
+      "vsRocket": {
+        "label": "vs. Rocket Money",
+        "text": "Rocket Money limpia tu pasado. Bamboo construye tu futuro."
+      }
+    },
+    "personas": {
+      "label": "Para quién es",
+      "headline": "Diseñado para vidas financieras reales.",
+      "couples": {
+        "title": "Parejas uniendo finanzas",
+        "body": "Claridad compartida sin estrés compartido. Ve a dónde va tu dinero juntos."
+      },
+      "quitters": {
+        "title": "Personas que lo intentaron y dejaron",
+        "body": "Presupuestar no debería sentirse como un segundo trabajo. Bamboo hace el trabajo por ti."
+      },
+      "goalSetters": {
+        "title": "Los que fijan metas",
+        "body": "Conecta tus gastos diarios con la vida de tus sueños — viajes, una casa, libertad de deuda."
+      },
+      "bilingual": {
+        "title": "Inglés y español",
+        "body": "Disponible en ambos idiomas. Las herramientas financieras deben encontrarte donde estás."
+      }
+    },
+    "pricing": {
+      "label": "Precios",
+      "headline": "La claridad financiera debería ser accesible.",
+      "free": {
+        "title": "Gratis",
+        "subtitle": "Empieza sin compromiso",
+        "features": ["5 sobres", "Seguimiento básico", "2 metas", "Un solo usuario"]
+      },
+      "premium": {
+        "title": "Premium",
+        "badge": "Más popular",
+        "price": "$49.99",
+        "period": "/año",
+        "note": "Son $4.17/mes — menos que un café",
+        "features": ["Sobres ilimitados", "Sincronización bancaria", "Hogar compartido", "Asistente completo", "Seguimiento de patrimonio", "Metas ilimitadas"]
+      },
+      "footnote": "Menos de $1 por semana. Menos de la mitad del costo de Monarch o YNAB."
+    },
+    "cta": {
+      "headline": "Empieza a hacer crecer tu dinero.",
+      "description": "Únete a la lista de espera para acceso anticipado. Sé de los primeros en experimentar una forma más tranquila de manejar tus finanzas.",
+      "placeholder": "tu@correo.com",
+      "button": "Obtén acceso anticipado",
+      "builtBy": "Creado por Jose Pineda",
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "contact": "Contacto"
+    }
+  },
+
+  "today": {
+    "greeting": "Buenos días, {name}",
+    "netWorth": {
+      "label": "Patrimonio Neto",
+      "sparklineLabel": "Últimos 90 días"
+    },
+    "envelopes": {
+      "label": "Sobres",
+      "seeAll": "Ver todos",
+      "remaining": "restante"
+    },
+    "upcoming": {
+      "label": "Próximamente"
+    },
+    "recent": {
+      "label": "Recientes",
+      "seeAll": "Ver todas las transacciones"
+    }
+  },
+
+  "envelopes": {
+    "title": "Sobres",
+    "remaining": "restante",
+    "daysLeft": "{days} días restantes",
+    "search": "Buscar sobres...",
+    "addEnvelope": "Agregar Sobre",
+    "groups": {
+      "essentials": "Esenciales",
+      "lifestyle": "Estilo de Vida",
+      "growth": "Crecimiento"
+    },
+    "spent": "{amount} gastado",
+    "allocatedThisMonth": "asignado este mes",
+    "of": "de {amount}",
+    "paceAhead": "Ritmo adelantado"
+  },
+
+  "goals": {
+    "title": "Tus Metas",
+    "active": "{count} activas",
+    "totalTarget": "objetivo total",
+    "perMonth": "/mes",
+    "debtFreeBy": "Libre de deuda para",
+    "onPaceFor": "En camino para",
+    "remainingOf": "restante de {amount} original",
+    "of": "de {amount}",
+    "plantGoal": "Plantar una Nueva Meta"
+  },
+
+  "ask": {
+    "title": "Pregunta a Bamboo",
+    "placeholder": "Pregunta cualquier cosa sobre tus finanzas...",
+    "suggested": "Sugeridos",
+    "recentInsights": "Análisis Recientes",
+    "clear": "Borrar y empezar de nuevo",
+    "suggestions": [
+      "¿Cómo nos fue este mes?",
+      "¿Estoy en camino con mis metas?",
+      "¿Dónde puedo reducir gastos?",
+      "Compara este mes con el anterior"
+    ],
+    "response": {
+      "title": "Resumen de Marzo (hasta el día 9)",
+      "totalSpent": "Total gastado",
+      "totalBudget": "Presupuesto total",
+      "remaining": "Restante",
+      "dailyPace": "Ritmo diario",
+      "budgetPace": "Ritmo presupuesto",
+      "envelopesOnPace": "Sobres en ritmo:",
+      "diningAhead": "Restaurantes va 22% por encima del objetivo",
+      "groceriesHot": "Supermercado ligeramente por encima",
+      "netWorthLabel": "Patrimonio neto:",
+      "thisMonth": "este mes",
+      "overall": "En general: Vas bien encaminado. Lo principal a vigilar es restaurantes — si el ritmo se mantiene, te pasarás $66 al final del mes. Cocinar tres comidas más en casa este mes cerraría esa brecha.",
+      "followUps": [
+        "¿Cuáles son mis mayores gastos?",
+        "Muéstrame un desglose de gastos",
+        "¿Cómo se compara esto con febrero?"
+      ]
+    }
+  },
+
+  "data": {
+    "envelopes": {
+      "groceries": "Supermercado",
+      "rent": "Renta / Hipoteca",
+      "utilities": "Servicios",
+      "transportation": "Gasolina y Transporte",
+      "dining": "Restaurantes",
+      "entertainment": "Entretenimiento",
+      "shopping": "Compras",
+      "subscriptions": "Suscripciones",
+      "savings": "Fondo de Emergencia",
+      "debt": "Pago de Deuda"
+    },
+    "paceNotes": {
+      "groceries": "$15.26/día de ritmo",
+      "utilities": "$6.23/día de ritmo",
+      "transportation": "$3.50/día de ritmo",
+      "dining": "Ritmo: 22% adelantado",
+      "debt": "Restante: $8,200 · Libre de deuda Nov 2027"
+    },
+    "paidDates": {
+      "rent": "Pagado Mar 1",
+      "savings": "Transferido Mar 1"
+    },
+    "goals": {
+      "emergency": {
+        "name": "Fondo de Emergencia",
+        "insight": "Al ritmo actual, alcanzarás 3 meses de gastos para agosto. La mitad de una red de seguridad sigue siendo una red de seguridad."
+      },
+      "japan": {
+        "name": "Viaje a Japón",
+        "insight": "Llevas el 45% del camino. A este ritmo, tendrás suficiente para vuelos y dos semanas de viaje para otoño."
+      },
+      "creditCard": {
+        "name": "Libertad de Tarjeta de Crédito",
+        "insight": "Has eliminado $3,800 en deuda desde que empezaste. Son $3,800 que ya no están acumulando intereses."
+      }
+    },
+    "insights": {
+      "todayInsight": "Día 9 de marzo. Cuatro de seis sobres van a buen ritmo. Restaurantes va 20% por encima del mes pasado — vale la pena vigilar.",
+      "groceryInsight": "Tu gasto en supermercado promedió $187/semana este mes — $22 por encima de tu objetivo de sobre. El aumento se concentra en los fines de semana.",
+      "subscriptionInsight": "Tres cargos recurrentes no se han usado en más de 60 días:",
+      "groceryFollowUp": "¿Cómo puedo reducir el gasto de supermercado los fines de semana?",
+      "subscriptionFollowUp": "Revisar suscripciones"
+    },
+    "dates": {
+      "today": "Hoy",
+      "yesterday": "Ayer"
+    }
+  }
+}

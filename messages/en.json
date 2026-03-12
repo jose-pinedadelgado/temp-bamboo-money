@@ -1,0 +1,273 @@
+{
+  "meta": {
+    "title": "Bamboo Money — Your money, growing.",
+    "description": "Bamboo Money brings your spending, subscriptions, and net worth into one calm, intelligent space — so you can focus on building the life you want."
+  },
+
+  "nav": {
+    "today": "Today",
+    "envelopes": "Envelopes",
+    "goals": "Goals",
+    "askBamboo": "Ask Bamboo",
+    "settings": "Settings",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "openApp": "Open App",
+    "joinWaitlist": "Join the Waitlist"
+  },
+
+  "landing": {
+    "brand": "Bamboo Money",
+    "hero": {
+      "headline1": "Your money,",
+      "headline2": "growing.",
+      "subheadline": "Bamboo Money brings your spending, subscriptions, and net worth into one calm, intelligent space — so you can focus on building the life you want.",
+      "ctaPrimary": "Get Early Access",
+      "ctaSecondary": "See How It Works",
+      "ctaNote": "Free to start. Premium for $4.17/month."
+    },
+    "problem": {
+      "label": "The problem",
+      "headline": "Managing money shouldn't feel like this.",
+      "items": {
+        "budgeting": {
+          "title": "Budgeting feels like homework",
+          "body": "60% of users abandon budgeting apps within 90 days. The tools demand too much work for too little payoff."
+        },
+        "dashboards": {
+          "title": "Dashboards show everything but change nothing",
+          "body": "Knowing you spent $847 on dining last month doesn't help you spend less this month. Insight without action is just noise."
+        },
+        "fragmented": {
+          "title": "Five different apps for one financial life",
+          "body": "Budget in one app, subscriptions in another, net worth in a third. Your financial picture is scattered across tools that don't talk to each other."
+        }
+      },
+      "bridge": "There's a better way."
+    },
+    "pillars": {
+      "label": "How it works",
+      "headline": "One app. Three pillars. Your whole financial picture.",
+      "envelopes": {
+        "title": "Envelopes",
+        "body": "Know exactly what you have left to spend — in real time, for every category. Not after the month ends. Right now."
+      },
+      "subscriptions": {
+        "title": "Subscriptions",
+        "body": "Every recurring charge, detected and tracked. See what you're paying, what you're not using, and what that money could do instead."
+      },
+      "netWorth": {
+        "title": "Net Worth",
+        "body": "All your accounts — checking, savings, investments, debt — in one quiet number that grows over time."
+      },
+      "bridge": "And an intelligent assistant that ties it all together."
+    },
+    "assistant": {
+      "label": "Meet Bamboo",
+      "headline": "Not a chatbot. An intelligence woven into everything.",
+      "description": "Bamboo observes your financial patterns and delivers insights you can act on — calm, specific, and grounded in your actual data.",
+      "insights": [
+        "Your grocery envelope has $62 remaining this week. Past months show this is where spending spikes — a good moment to plan ahead.",
+        "Three subscriptions haven't been used in 60+ days. Canceling all three adds $912/year to your travel fund.",
+        "Your net worth has grown $2,340 in the last 90 days. At this rate, you'll reach your $50K milestone in November."
+      ]
+    },
+    "competitive": {
+      "label": "Why Bamboo",
+      "headline": "Built different.",
+      "vsYnab": {
+        "label": "vs. YNAB",
+        "text": "YNAB gives every dollar a job. Bamboo gives your dollars jobs for you — based on the life you told us you want."
+      },
+      "vsMonarch": {
+        "label": "vs. Monarch",
+        "text": "Monarch shows you everything. Bamboo shows you what to do about it."
+      },
+      "vsRocket": {
+        "label": "vs. Rocket Money",
+        "text": "Rocket Money cleans up your past. Bamboo builds your future."
+      }
+    },
+    "personas": {
+      "label": "Who it's for",
+      "headline": "Designed for real financial lives.",
+      "couples": {
+        "title": "Couples merging finances",
+        "body": "Shared clarity without shared stress. See where your money goes together."
+      },
+      "quitters": {
+        "title": "People who've tried and quit",
+        "body": "Budgeting shouldn't feel like a second job. Bamboo does the work for you."
+      },
+      "goalSetters": {
+        "title": "Goal-setters",
+        "body": "Connect daily spending to your dream life — travel, a home, freedom from debt."
+      },
+      "bilingual": {
+        "title": "English & Spanish",
+        "body": "Available in both languages. Financial tools should meet you where you are."
+      }
+    },
+    "pricing": {
+      "label": "Pricing",
+      "headline": "Financial clarity should be accessible.",
+      "free": {
+        "title": "Free",
+        "subtitle": "Get started, no commitment",
+        "features": ["5 envelopes", "Basic tracking", "2 goals", "Single user"]
+      },
+      "premium": {
+        "title": "Premium",
+        "badge": "Most popular",
+        "price": "$49.99",
+        "period": "/year",
+        "note": "That's $4.17/month — less than a coffee",
+        "features": ["Unlimited envelopes", "Bank sync", "Household sharing", "Full assistant", "Net worth tracking", "Unlimited goals"]
+      },
+      "footnote": "Less than $1 per week. Less than half the cost of Monarch or YNAB."
+    },
+    "cta": {
+      "headline": "Start growing your money.",
+      "description": "Join the waitlist for early access. Be among the first to experience a calmer way to manage your finances.",
+      "placeholder": "you@email.com",
+      "button": "Get Early Access",
+      "builtBy": "Built by Jose Pineda",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "contact": "Contact"
+    }
+  },
+
+  "today": {
+    "greeting": "Good morning, {name}",
+    "netWorth": {
+      "label": "Net Worth",
+      "sparklineLabel": "Last 90 days"
+    },
+    "envelopes": {
+      "label": "Envelopes",
+      "seeAll": "See all",
+      "remaining": "remaining"
+    },
+    "upcoming": {
+      "label": "Upcoming"
+    },
+    "recent": {
+      "label": "Recent",
+      "seeAll": "See all transactions"
+    }
+  },
+
+  "envelopes": {
+    "title": "Envelopes",
+    "remaining": "remaining",
+    "daysLeft": "{days} days left",
+    "search": "Search envelopes...",
+    "addEnvelope": "Add Envelope",
+    "groups": {
+      "essentials": "Essentials",
+      "lifestyle": "Lifestyle",
+      "growth": "Growth"
+    },
+    "spent": "{amount} spent",
+    "allocatedThisMonth": "allocated this month",
+    "of": "of {amount}",
+    "paceAhead": "Pace ahead"
+  },
+
+  "goals": {
+    "title": "Your Goals",
+    "active": "{count} active",
+    "totalTarget": "total target",
+    "perMonth": "/month",
+    "debtFreeBy": "Debt-free by",
+    "onPaceFor": "On pace for",
+    "remainingOf": "remaining of {amount} original",
+    "of": "of {amount}",
+    "plantGoal": "Plant a New Goal"
+  },
+
+  "ask": {
+    "title": "Ask Bamboo",
+    "placeholder": "Ask anything about your finances...",
+    "suggested": "Suggested",
+    "recentInsights": "Recent Insights",
+    "clear": "Clear and start over",
+    "suggestions": [
+      "How did we do this month?",
+      "Am I on track for my goals?",
+      "Where can I cut spending?",
+      "Compare this month to last"
+    ],
+    "response": {
+      "title": "March Summary (through day 9)",
+      "totalSpent": "Total spent",
+      "totalBudget": "Total budget",
+      "remaining": "Remaining",
+      "dailyPace": "Daily pace",
+      "budgetPace": "Budget pace",
+      "envelopesOnPace": "Envelopes on pace:",
+      "diningAhead": "Dining is 22% ahead of target",
+      "groceriesHot": "Groceries running slightly hot",
+      "netWorthLabel": "Net worth:",
+      "thisMonth": "this month",
+      "overall": "Overall: You're tracking well. The main thing to watch is dining — if the pace holds, you'll go $66 over by month end. Cooking three more meals at home this month would close that gap.",
+      "followUps": [
+        "What are my biggest expenses?",
+        "Show me a spending breakdown",
+        "How does this compare to Feb?"
+      ]
+    }
+  },
+
+  "data": {
+    "envelopes": {
+      "groceries": "Groceries",
+      "rent": "Rent / Mortgage",
+      "utilities": "Utilities",
+      "transportation": "Gas & Transit",
+      "dining": "Dining",
+      "entertainment": "Entertainment",
+      "shopping": "Shopping",
+      "subscriptions": "Subscriptions",
+      "savings": "Emergency Fund",
+      "debt": "Debt Payoff"
+    },
+    "paceNotes": {
+      "groceries": "$15.26/day pace",
+      "utilities": "$6.23/day pace",
+      "transportation": "$3.50/day pace",
+      "dining": "Pace: 22% ahead",
+      "debt": "Remaining: $8,200 · Debt-free by Nov 2027"
+    },
+    "paidDates": {
+      "rent": "Paid Mar 1",
+      "savings": "Transferred Mar 1"
+    },
+    "goals": {
+      "emergency": {
+        "name": "Emergency Fund",
+        "insight": "At current pace, you'll reach 3 months of expenses by August. Half a safety net is still a safety net."
+      },
+      "japan": {
+        "name": "Japan Trip",
+        "insight": "You're 45% of the way there. At this pace, you'll have enough for flights and two weeks of travel by fall."
+      },
+      "creditCard": {
+        "name": "Credit Card Freedom",
+        "insight": "You've eliminated $3,800 in debt since you started. That's $3,800 that isn't accruing interest anymore."
+      }
+    },
+    "insights": {
+      "todayInsight": "Day 9 of March. Four of six envelopes are on pace. Dining is running 20% ahead of last month — worth watching.",
+      "groceryInsight": "Your grocery spending averaged $187/week this month — $22 above your envelope target. The increase is concentrated on weekends.",
+      "subscriptionInsight": "Three recurring charges haven't been used in 60+ days:",
+      "groceryFollowUp": "How can I reduce weekend grocery spending?",
+      "subscriptionFollowUp": "Review subscriptions"
+    },
+    "dates": {
+      "today": "Today",
+      "yesterday": "Yesterday"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm 2>&1 | tail -20)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npx create-next-app@latest temp-next --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm 2>&1 | tail -20)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && echo \"N\" | npx create-next-app@latest temp-next --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm --turbopack 2>&1 | tail -20)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && cp -r temp-next/src temp-next/public temp-next/package.json temp-next/tsconfig.json temp-next/next.config.ts temp-next/postcss.config.mjs temp-next/next-env.d.ts temp-next/.gitignore temp-next/node_modules temp-next/package-lock.json temp-next/eslint.config.mjs . 2>&1 && rm -rf temp-next && ls package.json src/)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm install lucide-react 2>&1 | tail -5)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run build 2>&1 | tail -40)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && mv \"src/app/\\(app\\)\" \"src/app/app\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run build 2>&1 | tail -20)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run lint 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run build 2>&1 | tail -15)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run dev 2>&1 | head -10)",
+      "Bash(sleep 3 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/app)",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_run_code",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && timeout 10 curl -v http://localhost:3000/app 2>&1 | head -30)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && curl -s -m 10 http://localhost:3000/app 2>&1 | head -5)",
+      "Bash(taskkill //F //IM node.exe 2>&1 | tail -3)",
+      "Bash(start http://localhost:3000)",
+      "Bash(start http://localhost:3000/app)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run build 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm run build 2>&1 && npm run lint 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm install next-intl 2>&1)",
+      "Bash(ls -la /c/Users/coche/Documents/Research_Projects/0_bamboo_money/ | grep -E \"^-.*\\\\.\\(ts|js\\)$\")",
+      "Bash(find /c/Users/coche/Documents/Research_Projects/0_bamboo_money/src/app -type f -name \"*.tsx\" -o -name \"*.ts\" | grep -E \"/\\(page|layout\\)\\\\.\\(tsx|ts\\)$\" | sort)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
