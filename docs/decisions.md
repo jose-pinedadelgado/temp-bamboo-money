@@ -84,4 +84,28 @@ Architectural, design, and product decisions with context and rationale. Read th
 
 ---
 
+## 2026-03-12 — Transactions as Sub-Page, Not Fifth View
+**Context**: Phase 1 of Monarch parity roadmap requires a transaction list page, but CLAUDE.md specifies "four views only"
+**Decision**: Transactions lives at `/app/transactions` as a detail page accessible from "See all transactions" link. No nav tab added.
+**Alternatives Considered**: Adding a fifth tab, embedding full transaction list within Today view, modal overlay
+**Rationale**: Respects the four-view architecture constraint. Transaction list is a utility page (search, filter, review) — not a primary mental model. Monarch also separates transactions from the main nav hierarchy.
+
+---
+
+## 2026-03-12 — Account Balances: Positive = Asset, Negative = Liability
+**Context**: Defining the Account type for the data layer
+**Decision**: `balance` field uses accounting sign convention: positive for assets (checking, savings, investments), negative for credit cards and loans
+**Alternatives Considered**: Always-positive balance with a separate `isLiability` boolean, separate `debt` field
+**Rationale**: Single-field sign convention makes net worth calculation trivial (`accounts.reduce(sum + balance)`). Matches how financial APIs (Plaid) return data. Avoids boolean branching in aggregation logic.
+
+---
+
+## 2026-03-12 — Aggregation Helpers as Pure Functions in data/helpers.ts
+**Context**: Dashboard and components need computed values (net worth, spending by category, monthly totals)
+**Decision**: All aggregation logic lives in `src/data/helpers.ts` as pure functions that take data arrays and return computed results
+**Alternatives Considered**: Computing inside components, React context/store, server-side computation
+**Rationale**: Pure functions are independently testable, have no React dependency, and make the swap to real API data trivial — only the data source changes, not the computation logic. When a real backend exists, these functions become the interface contract.
+
+---
+
 <!-- Future decisions will be appended below by Claude Code. Do not delete existing entries. -->

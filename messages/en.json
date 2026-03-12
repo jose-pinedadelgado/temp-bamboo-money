@@ -149,6 +149,9 @@
       "seeAll": "See all",
       "remaining": "remaining"
     },
+    "spending": {
+      "label": "Spending This Month"
+    },
     "upcoming": {
       "label": "Upcoming"
     },

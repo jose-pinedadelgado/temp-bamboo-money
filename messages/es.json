@@ -149,6 +149,9 @@
       "seeAll": "Ver todos",
       "remaining": "restante"
     },
+    "spending": {
+      "label": "Gastos Este Mes"
+    },
     "upcoming": {
       "label": "Próximamente"
     },

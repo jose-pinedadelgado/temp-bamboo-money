@@ -83,4 +83,51 @@ Summary of each development session: what was accomplished, decisions made, and 
 
 ---
 
+## Session 2 — 2026-03-12 (Overnight Loop, Iteration 1)
+
+**Goal**: Monarch Parity Phase 1 — Core Data Layer. Build transaction/account types, rich mock data, transactions page, net worth component, accounts list, and wire the Today dashboard to real aggregated data.
+
+### What Was Accomplished
+
+- Created TypeScript types for Transaction (with category, status, recurring, excludeFromBudget) and Account (with type, balance, institution, mask)
+- Defined 16 transaction categories with icons and colors
+- Created 55 mock transactions across March and late February 2026 (realistic merchants, amounts, dates, statuses)
+- Created 10 mock accounts across 6 types (checking, savings, credit cards, investments, loans, vehicles, cash)
+- Built aggregation helpers: calculateNetWorth, groupAccounts, getSpendingByCategory, getRecentTransactions, getMonthlyTotals
+- Built full Transactions page at `/app/transactions` with search, category filters, status filters, date/amount/merchant sorting, date grouping, status icons, category dots
+- Built NetWorthSummary component with sparkline, assets/liabilities breakdown, monthly cash flow
+- Built AccountsList component grouped by type with subtotals and icons
+- Rewired Today dashboard: net worth from real accounts, recent transactions from data layer, new "Spending This Month" section, accounts section, link to transactions page
+- Added i18n translations for new "Spending This Month" label (en + es)
+
+### Decisions Made
+- Transactions page is a sub-route, not a fifth view (see decisions.md)
+- Account balances use accounting sign convention (positive = asset, negative = liability)
+- Aggregation helpers as pure functions for testability and API-swappability
+
+### Patterns Discovered
+- ISO date strings with `T12:00:00` suffix avoids timezone-shift issues when formatting dates in `toLocaleDateString()`
+- `Map`-based grouping pattern (for both accounts and date-grouped transactions) is clean and efficient
+- Category metadata separated from transaction data enables future category management features
+
+### Open Items
+- Phase 2 (Budget Engine) is next on the Monarch parity roadmap
+- No tests written for aggregation helpers yet (would be high-value, pure function tests)
+- Transaction "reviewed" toggle is display-only — needs state management to be interactive
+- Net worth history is still simulated (16 hardcoded points) — needs to be computed from historical account snapshots
+
+### Files Created (10 new files)
+- `src/types/transaction.ts`, `src/types/account.ts`, `src/types/index.ts`
+- `src/data/categories.ts`, `src/data/accounts.ts`, `src/data/transactions.ts`, `src/data/helpers.ts`
+- `src/app/app/transactions/page.tsx`
+- `src/components/app/NetWorthSummary.tsx`, `src/components/app/AccountsList.tsx`
+- `docs/BUILD_LOG.md`
+
+### Files Modified (3 files)
+- `src/app/app/page.tsx` — rewired to real data layer
+- `messages/en.json` — added spending.label
+- `messages/es.json` — added spending.label
+
+---
+
 <!-- Entries will be appended below by Claude Code. Do not delete this file. -->

@@ -3,15 +3,14 @@
 import { Card } from "@/components/ui/Card";
 import { InsightCard } from "@/components/ui/InsightCard";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import {
-  user,
-  envelopes,
-  recentTransactions,
-  upcomingBills,
-} from "@/data/mock-data";
+import { NetWorthSummary } from "@/components/app/NetWorthSummary";
+import { AccountsList } from "@/components/app/AccountsList";
+import { envelopes, upcomingBills } from "@/data/mock-data";
+import { transactions } from "@/data/transactions";
+import { getRecentTransactions, getSpendingByCategory } from "@/data/helpers";
 import { formatCurrency } from "@/lib/utils";
 import { useTranslations } from "next-intl";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function TodayView() {
@@ -21,6 +20,9 @@ export default function TodayView() {
   const activeEnvelopes = envelopes
     .filter((e) => e.group !== "growth" && e.id !== "rent")
     .slice(0, 5);
+
+  const recentTxns = getRecentTransactions(transactions, 5);
+  const spendingByCategory = getSpendingByCategory(transactions, "2026-03").slice(0, 5);
 
   const bambooInsight = {
     id: "today-insight",
@@ -33,57 +35,57 @@ export default function TodayView() {
       {/* ─── Greeting ───────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-semibold text-lg text-text-primary">
-          {t("greeting", { name: user.name })}
+          {t("greeting", { name: "Jose" })}
         </h1>
         <p className="text-sm text-text-secondary font-body">
-          March 9, 2026
+          March 12, 2026
         </p>
       </div>
 
-      {/* ─── Net Worth Card ─────────────────────── */}
-      <Card className="animate-fade-up stagger-2" hoverable>
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium">
-              {t("netWorth.label")}
-            </p>
-            <p className="font-display font-bold text-3xl text-green-deep mt-1">
-              {formatCurrency(user.netWorth)}
-            </p>
-          </div>
-          <div className="flex items-center gap-1 text-positive text-sm font-body font-medium bg-green-light px-2 py-1 rounded-sm">
-            <ArrowUpRight className="w-3.5 h-3.5" />
-            {formatCurrency(user.netWorthChange, true)}
-          </div>
-        </div>
-
-        {/* Sparkline */}
-        <div className="mt-4 h-10 flex items-end gap-[3px]">
-          {user.netWorthTrend.map((val, i) => {
-            const max = Math.max(...user.netWorthTrend);
-            const min = Math.min(...user.netWorthTrend);
-            const height = ((val - min) / (max - min)) * 100;
-            return (
-              <div
-                key={i}
-                className="flex-1 bg-green-accent/30 rounded-t-sm min-h-[2px]"
-                style={{ height: `${Math.max(height, 5)}%` }}
-              />
-            );
-          })}
-        </div>
-        <p className="mt-1 text-xs text-text-tertiary font-body text-right">
-          {t("netWorth.sparklineLabel")}
-        </p>
-      </Card>
+      {/* ─── Net Worth (computed from accounts) ──── */}
+      <div className="animate-fade-up stagger-2">
+        <NetWorthSummary />
+      </div>
 
       {/* ─── Bamboo Insight ─────────────────────── */}
       <div className="animate-fade-up stagger-3">
         <InsightCard insight={bambooInsight} />
       </div>
 
-      {/* ─── Envelope Summary ───────────────────── */}
+      {/* ─── Spending by Category ─────────────────── */}
       <div className="animate-fade-up stagger-4">
+        <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
+          {t("spending.label")}
+        </p>
+        <Card>
+          <div className="space-y-3">
+            {spendingByCategory.map((item) => (
+              <div key={item.category.id}>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${item.category.color}`} />
+                    <span className="text-sm font-body text-text-primary">
+                      {item.category.label}
+                    </span>
+                  </div>
+                  <span className="font-display font-semibold text-sm text-text-primary">
+                    {formatCurrency(item.total)}
+                  </span>
+                </div>
+                <div className="w-full h-1 bg-bg-subtle rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${item.category.color} animate-progress-fill`}
+                    style={{ width: `${Math.min(item.percentage, 100)}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      {/* ─── Envelope Summary ───────────────────── */}
+      <div className="animate-fade-up stagger-5">
         <div className="flex items-center justify-between mb-3">
           <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium">
             {t("envelopes.label")}
@@ -130,7 +132,7 @@ export default function TodayView() {
       </div>
 
       {/* ─── Upcoming Bills ─────────────────────── */}
-      <div className="animate-fade-up stagger-5">
+      <div className="animate-fade-up stagger-6">
         <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
           {t("upcoming.label")}
         </p>
@@ -158,13 +160,13 @@ export default function TodayView() {
         </Card>
       </div>
 
-      {/* ─── Recent Activity ────────────────────── */}
-      <div className="animate-fade-up stagger-6">
+      {/* ─── Recent Transactions (from data layer) ── */}
+      <div className="animate-fade-up stagger-7">
         <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
           {t("recent.label")}
         </p>
         <div className="space-y-1">
-          {recentTransactions.map((tx) => (
+          {recentTxns.map((tx) => (
             <div
               key={tx.id}
               className="flex items-center justify-between py-2.5 px-1"
@@ -173,11 +175,12 @@ export default function TodayView() {
                 <p className="text-sm font-body text-text-primary truncate">
                   {tx.merchant}
                 </p>
-                {tx.envelope && (
-                  <p className="text-xs text-text-tertiary font-body">
-                    {tx.envelope}
-                  </p>
-                )}
+                <p className="text-xs text-text-tertiary font-body">
+                  {new Date(tx.date + "T12:00:00").toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </p>
               </div>
               <span
                 className={`font-display font-semibold text-sm ${
@@ -191,11 +194,19 @@ export default function TodayView() {
         </div>
 
         <div className="mt-4 text-center">
-          <button className="text-sm text-text-secondary font-body hover:text-green-primary transition-colors inline-flex items-center gap-1 cursor-pointer">
+          <Link
+            href="/app/transactions"
+            className="text-sm text-text-secondary font-body hover:text-green-primary transition-colors inline-flex items-center gap-1"
+          >
             {t("recent.seeAll")}
             <ChevronRight className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
+      </div>
+
+      {/* ─── Accounts ─────────────────────────────── */}
+      <div className="animate-fade-up stagger-8">
+        <AccountsList />
       </div>
     </div>
   );
