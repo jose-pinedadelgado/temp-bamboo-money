@@ -2,15 +2,16 @@ import { cn } from "@/lib/utils";
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: "default" | "positive" | "caution" | "warning";
+  variant?: "default" | "positive" | "caution" | "warning" | "info";
   className?: string;
 }
 
 const variantStyles = {
   default: "bg-bg-subtle text-text-secondary",
-  positive: "bg-green-light text-green-primary",
-  caution: "bg-[#fdf6e3] dark:bg-caution/15 text-[#b8860b] dark:text-caution",
-  warning: "bg-[#fef0ec] dark:bg-warning/15 text-warning",
+  positive: "bg-positive-soft text-green-primary",
+  caution: "bg-caution-soft text-caution-text",
+  warning: "bg-warning-soft text-warning",
+  info: "bg-info-soft text-info",
 };
 
 export function Badge({ children, variant = "default", className }: BadgeProps) {

@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/Card";
 import { InsightCard } from "@/components/ui/InsightCard";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NetWorthSummary } from "@/components/app/NetWorthSummary";
 import { AccountsList } from "@/components/app/AccountsList";
 import { envelopes, upcomingBills } from "@/data/mock-data";
@@ -31,7 +32,7 @@ export default function TodayView() {
   };
 
   return (
-    <div className="space-y-8 animate-view-enter">
+    <div className="space-y-[var(--section-gap)] animate-view-enter">
       {/* ─── Greeting ───────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-semibold text-lg text-text-primary">
@@ -54,10 +55,8 @@ export default function TodayView() {
 
       {/* ─── Spending by Category ─────────────────── */}
       <div className="animate-fade-up stagger-4">
-        <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
-          {t("spending.label")}
-        </p>
-        <Card>
+        <SectionHeader title={t("spending.label")} />
+        <Card bordered>
           <div className="space-y-3">
             {spendingByCategory.map((item) => (
               <div key={item.category.id}>
@@ -68,7 +67,7 @@ export default function TodayView() {
                       {item.category.label}
                     </span>
                   </div>
-                  <span className="font-display font-semibold text-sm text-text-primary">
+                  <span className="font-display font-semibold text-sm text-text-primary tabular-nums">
                     {formatCurrency(item.total)}
                   </span>
                 </div>
@@ -86,17 +85,17 @@ export default function TodayView() {
 
       {/* ─── Envelope Summary ───────────────────── */}
       <div className="animate-fade-up stagger-5">
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium">
-            {t("envelopes.label")}
-          </p>
-          <Link
-            href="/app/envelopes"
-            className="text-xs text-green-primary font-body font-medium hover:text-green-accent transition-colors"
-          >
-            {t("envelopes.seeAll")}
-          </Link>
-        </div>
+        <SectionHeader
+          title={t("envelopes.label")}
+          action={
+            <Link
+              href="/app/envelopes"
+              className="text-xs text-green-primary font-body font-medium hover:text-green-accent transition-colors"
+            >
+              {t("envelopes.seeAll")}
+            </Link>
+          }
+        />
 
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
           {activeEnvelopes.map((env) => {
@@ -106,12 +105,13 @@ export default function TodayView() {
               <Card
                 key={env.id}
                 hoverable
+                bordered
                 className="min-w-[140px] flex-shrink-0 p-3"
               >
                 <p className="font-body font-medium text-sm text-text-primary truncate">
                   {td(`envelopes.${env.id}`)}
                 </p>
-                <p className="font-display font-semibold text-lg text-green-deep mt-1">
+                <p className="font-display font-semibold text-lg text-green-deep mt-1 tabular-nums">
                   {formatCurrency(remaining)}
                 </p>
                 <p className="text-xs text-text-tertiary font-body">
@@ -133,15 +133,13 @@ export default function TodayView() {
 
       {/* ─── Upcoming Bills ─────────────────────── */}
       <div className="animate-fade-up stagger-6">
-        <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
-          {t("upcoming.label")}
-        </p>
-        <Card>
-          <div className="divide-y divide-bg-subtle">
+        <SectionHeader title={t("upcoming.label")} />
+        <Card bordered>
+          <div className="divide-y divide-border-divider">
             {upcomingBills.map((bill) => (
               <div
                 key={bill.id}
-                className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0"
+                className="flex items-center justify-between min-h-[var(--row-min-height)] py-2.5 first:pt-0 last:pb-0"
               >
                 <span className="text-sm font-body text-text-primary">
                   {bill.name}
@@ -150,7 +148,7 @@ export default function TodayView() {
                   <span className="text-xs text-text-tertiary font-body">
                     {bill.date}
                   </span>
-                  <span className="font-display font-semibold text-sm text-text-primary">
+                  <span className="font-display font-semibold text-sm text-text-primary tabular-nums">
                     {formatCurrency(bill.amount)}
                   </span>
                 </div>
@@ -160,43 +158,43 @@ export default function TodayView() {
         </Card>
       </div>
 
-      {/* ─── Recent Transactions (from data layer) ── */}
+      {/* ─── Recent Transactions ────────────────── */}
       <div className="animate-fade-up stagger-7">
-        <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
-          {t("recent.label")}
-        </p>
-        <div className="space-y-1">
-          {recentTxns.map((tx) => (
-            <div
-              key={tx.id}
-              className="flex items-center justify-between py-2.5 px-1"
-            >
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-body text-text-primary truncate">
-                  {tx.merchant}
-                </p>
-                <p className="text-xs text-text-tertiary font-body">
-                  {new Date(tx.date + "T12:00:00").toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
-              <span
-                className={`font-display font-semibold text-sm ${
-                  tx.amount > 0 ? "text-positive" : "text-text-primary"
-                }`}
+        <SectionHeader title={t("recent.label")} />
+        <Card bordered>
+          <div className="divide-y divide-border-divider">
+            {recentTxns.map((tx) => (
+              <div
+                key={tx.id}
+                className="flex items-center justify-between min-h-[var(--row-min-height)] py-2.5"
               >
-                {formatCurrency(tx.amount, tx.amount > 0)}
-              </span>
-            </div>
-          ))}
-        </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-body text-text-primary truncate">
+                    {tx.merchant}
+                  </p>
+                  <p className="text-xs text-text-tertiary font-body">
+                    {new Date(tx.date + "T12:00:00").toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
+                <span
+                  className={`font-display font-semibold text-sm tabular-nums ${
+                    tx.amount > 0 ? "text-positive" : "text-text-primary"
+                  }`}
+                >
+                  {formatCurrency(tx.amount, tx.amount > 0)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Card>
 
         <div className="mt-4 text-center">
           <Link
             href="/app/transactions"
-            className="text-sm text-text-secondary font-body hover:text-green-primary transition-colors inline-flex items-center gap-1"
+            className="text-sm text-text-secondary font-body hover:text-green-primary transition-colors inline-flex items-center gap-1 focus-ring rounded-[var(--radius-md)] px-2 py-1"
           >
             {t("recent.seeAll")}
             <ChevronRight className="w-4 h-4" />

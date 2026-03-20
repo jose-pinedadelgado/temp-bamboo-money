@@ -18,7 +18,17 @@ export function BottomNav() {
   const t = useTranslations("nav");
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-bg-card/95 backdrop-blur-md border-t border-bg-subtle h-16 safe-area-pb">
+    <nav
+      className={cn(
+        "md:hidden fixed bottom-0 left-0 right-0",
+        "z-[var(--z-sticky)]",
+        "bg-bg-card/95 backdrop-blur-md",
+        "border-t border-border-default",
+        "h-[var(--bottom-nav-height)]",
+        "safe-area-pb"
+      )}
+      aria-label="Main navigation"
+    >
       <div className="flex items-center justify-around h-full px-2">
         {navItems.map((item) => {
           const isActive =
@@ -31,16 +41,22 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center gap-0.5 py-1 px-3 relative transition-colors",
+                "flex flex-col items-center gap-0.5 py-1.5 px-3 relative",
+                "transition-colors focus-ring",
+                `duration-[var(--motion-normal)]`,
                 isActive ? "text-green-primary" : "text-text-tertiary"
               )}
+              aria-current={isActive ? "page" : undefined}
             >
-              <item.icon className="w-[22px] h-[22px]" strokeWidth={1.75} />
-              <span className="text-xs font-body font-medium">
+              <item.icon
+                className="w-[var(--bottom-nav-icon)] h-[var(--bottom-nav-icon)]"
+                strokeWidth={1.75}
+              />
+              <span className="text-[var(--bottom-nav-label)] font-body font-medium">
                 {t(item.labelKey)}
               </span>
               {isActive && (
-                <div className="absolute -bottom-1 w-1 h-1 rounded-full bg-green-primary" />
+                <div className="absolute -bottom-0.5 w-5 h-0.5 rounded-full bg-green-primary" />
               )}
             </Link>
           );

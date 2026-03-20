@@ -41,6 +41,12 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased relative">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-bg-card focus:text-text-primary focus:rounded-[var(--radius-md)] focus:shadow-elevated focus:outline-none focus:ring-2 focus:ring-border-focus font-body text-sm"
+        >
+          Skip to content
+        </a>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

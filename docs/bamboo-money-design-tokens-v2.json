@@ -1,0 +1,183 @@
+{
+  "$schema": "https://example.com/design-tokens.schema.json",
+  "meta": {
+    "name": "Bamboo Money Design Tokens",
+    "version": "0.1.0",
+    "status": "active",
+    "lastUpdated": "2026-03-15"
+  },
+  "color": {
+    "surface": {
+      "app": "#F6F8FA",
+      "primary": "#FFFFFF",
+      "secondary": "#F1F4F7",
+      "elevated": "#FFFFFF",
+      "inverse": "#12344D"
+    },
+    "text": {
+      "primary": "#1F2933",
+      "secondary": "#52606D",
+      "muted": "#7B8794",
+      "inverse": "#FFFFFF",
+      "disabled": "#9AA5B1"
+    },
+    "border": {
+      "default": "#D9E2EC",
+      "strong": "#BCCCDC",
+      "focus": "#2F6FED",
+      "divider": "#E5EAF0"
+    },
+    "brand": {
+      "primary": "#12344D",
+      "accent": "#C79A3B",
+      "accentSoft": "#F4E7C3"
+    },
+    "state": {
+      "positive": "#137333",
+      "positiveSoft": "#E7F6EC",
+      "warning": "#B26A00",
+      "warningSoft": "#FFF4D6",
+      "negative": "#B42318",
+      "negativeSoft": "#FEE4E2",
+      "info": "#175CD3",
+      "infoSoft": "#EAF2FF"
+    },
+    "nav": {
+      "background": "#12344D",
+      "itemDefault": "#D9E2EC",
+      "itemActive": "#FFFFFF",
+      "itemHover": "#F1F4F7",
+      "indicator": "#C79A3B"
+    },
+    "button": {
+      "primaryBg": "#12344D",
+      "primaryText": "#FFFFFF",
+      "secondaryBg": "#FFFFFF",
+      "secondaryText": "#12344D",
+      "secondaryBorder": "#BCCCDC",
+      "destructiveBg": "#B42318",
+      "destructiveText": "#FFFFFF"
+    },
+    "input": {
+      "background": "#FFFFFF",
+      "text": "#1F2933",
+      "placeholder": "#7B8794",
+      "border": "#BCCCDC",
+      "borderFocus": "#2F6FED",
+      "backgroundDisabled": "#F1F4F7"
+    }
+  },
+  "font": {
+    "family": {
+      "base": "\"Inter\", \"Segoe UI\", sans-serif"
+    },
+    "size": {
+      "xs": "12px",
+      "sm": "14px",
+      "md": "16px",
+      "lg": "18px",
+      "xl": "24px",
+      "2xl": "32px"
+    },
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "lineHeight": {
+      "tight": 1.2,
+      "normal": 1.5,
+      "relaxed": 1.7
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "xl": "24px",
+    "2xl": "32px",
+    "3xl": "40px"
+  },
+  "radius": {
+    "sm": "6px",
+    "md": "10px",
+    "lg": "14px",
+    "pill": "9999px"
+  },
+  "borderWidth": {
+    "thin": "1px",
+    "thick": "2px"
+  },
+  "shadow": {
+    "none": "none",
+    "sm": "0 1px 2px rgba(16, 24, 40, 0.06)",
+    "md": "0 4px 10px rgba(16, 24, 40, 0.08)"
+  },
+  "layout": {
+    "contentMaxWidth": "1280px",
+    "sidebarWidth": "264px",
+    "navRailWidth": "88px",
+    "secondaryPanelWidth": "320px",
+    "bottomNavHeight": "72px",
+    "sectionGap": "24px",
+    "cardPadding": "16px",
+    "pagePaddingMobile": "16px",
+    "pagePaddingDesktop": "24px"
+  },
+  "breakpoint": {
+    "mobile": "0px",
+    "tablet": "768px",
+    "desktop": "1200px"
+  },
+  "motion": {
+    "fast": "120ms",
+    "normal": "180ms",
+    "slow": "240ms",
+    "easingStandard": "cubic-bezier(0.2, 0, 0, 1)"
+  },
+  "zIndex": {
+    "base": 0,
+    "sticky": 200,
+    "dropdown": 400,
+    "drawer": 800,
+    "modal": 1000,
+    "toast": 1100
+  },
+  "component": {
+    "button": {
+      "height": {
+        "sm": "36px",
+        "md": "44px",
+        "lg": "52px"
+      },
+      "paddingInline": {
+        "sm": "12px",
+        "md": "16px",
+        "lg": "20px"
+      },
+      "radius": "10px"
+    },
+    "input": {
+      "height": "44px",
+      "radius": "10px",
+      "paddingInline": "12px"
+    },
+    "card": {
+      "radius": "14px",
+      "padding": "16px",
+      "borderWidth": "1px"
+    },
+    "row": {
+      "minHeight": "56px",
+      "paddingBlock": "12px",
+      "paddingInline": "16px"
+    },
+    "bottomNav": {
+      "height": "72px",
+      "iconSize": "24px",
+      "labelSize": "12px"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "destructive";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -11,17 +11,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-gold text-text-inverse hover:bg-[#c4955a] shadow-card hover:shadow-elevated",
+    "bg-btn-primary-bg text-btn-primary-text hover:brightness-110 shadow-card hover:shadow-elevated",
   secondary:
-    "border border-sand text-text-primary hover:bg-bg-subtle",
+    "bg-btn-secondary-bg border border-btn-secondary-border text-btn-secondary-text hover:bg-bg-subtle",
   ghost:
     "text-text-secondary hover:text-text-primary hover:bg-bg-subtle",
+  destructive:
+    "bg-btn-destructive-bg text-btn-destructive-text hover:brightness-110",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-5 py-2.5 text-base",
-  lg: "px-8 py-3.5 text-lg",
+  sm: "h-[var(--btn-height-sm)] px-[var(--btn-padding-sm)] text-sm",
+  md: "h-[var(--btn-height-md)] px-[var(--btn-padding-md)] text-base",
+  lg: "h-[var(--btn-height-lg)] px-[var(--btn-padding-lg)] text-lg",
 };
 
 export function Button({
@@ -34,8 +36,11 @@ export function Button({
   return (
     <button
       className={cn(
-        "font-body font-semibold rounded-md transition-all duration-200 cursor-pointer",
+        "inline-flex items-center justify-center font-body font-semibold",
+        "rounded-[var(--btn-radius)] transition-all focus-ring cursor-pointer",
+        `duration-[var(--motion-normal)]`,
         "hover:scale-[1.02] active:scale-[0.98]",
+        "disabled:opacity-50 disabled:pointer-events-none",
         variantStyles[variant],
         sizeStyles[size],
         className

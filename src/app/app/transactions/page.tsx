@@ -41,7 +41,6 @@ export default function TransactionsPage() {
   const filtered = useMemo(() => {
     let result = [...transactions];
 
-    // Search
     if (search) {
       const q = search.toLowerCase();
       result = result.filter(
@@ -52,17 +51,14 @@ export default function TransactionsPage() {
       );
     }
 
-    // Category filter
     if (categoryFilter !== "all") {
       result = result.filter((t) => t.category === categoryFilter);
     }
 
-    // Status filter
     if (statusFilter !== "all") {
       result = result.filter((t) => t.status === statusFilter);
     }
 
-    // Sort
     result.sort((a, b) => {
       let cmp = 0;
       if (sortField === "date") cmp = a.date.localeCompare(b.date);
@@ -104,9 +100,9 @@ export default function TransactionsPage() {
   }
 
   const statusIcon = (s: TransactionStatus) => {
-    if (s === "reviewed") return <CheckCircle2 className="w-3.5 h-3.5 text-positive" />;
-    if (s === "pending") return <Clock className="w-3.5 h-3.5 text-caution" />;
-    return <Circle className="w-3.5 h-3.5 text-text-tertiary" />;
+    if (s === "reviewed") return <CheckCircle2 className="w-3.5 h-3.5 text-positive" aria-label="Reviewed" />;
+    if (s === "pending") return <Clock className="w-3.5 h-3.5 text-caution" aria-label="Pending" />;
+    return <Circle className="w-3.5 h-3.5 text-text-tertiary" aria-label="Posted" />;
   };
 
   return (
@@ -115,7 +111,7 @@ export default function TransactionsPage() {
       <div className="flex items-center gap-3">
         <Link
           href="/app"
-          className="p-1.5 rounded-md hover:bg-bg-subtle transition-colors text-text-secondary"
+          className="p-1.5 rounded-[var(--radius-md)] hover:bg-bg-subtle transition-colors text-text-secondary focus-ring"
         >
           <ChevronLeft className="w-5 h-5" />
         </Link>
@@ -123,7 +119,7 @@ export default function TransactionsPage() {
           <h1 className="font-display font-semibold text-lg text-text-primary">
             Transactions
           </h1>
-          <p className="text-xs text-text-tertiary font-body">
+          <p className="text-xs text-text-tertiary font-body tabular-nums">
             {filtered.length} transaction{filtered.length !== 1 ? "s" : ""}
           </p>
         </div>
@@ -133,20 +129,24 @@ export default function TransactionsPage() {
       <div className="flex gap-2">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
+          <label htmlFor="txn-search" className="sr-only">Search transactions</label>
           <input
+            id="txn-search"
             type="text"
             placeholder="Search transactions..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-2.5 bg-bg-card border border-bg-subtle rounded-md text-sm font-body text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-green-accent/30 focus:border-green-accent transition-colors"
+            className="w-full h-[var(--input-height)] pl-9 pr-3 bg-input-bg border border-input-border rounded-[var(--input-radius)] text-sm font-body text-input-text placeholder:text-input-placeholder focus:outline-none focus:ring-2 focus:ring-border-focus/30 focus:border-border-focus transition-colors"
           />
         </div>
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className={`p-2.5 rounded-md border transition-colors cursor-pointer ${
+          aria-label="Toggle filters"
+          aria-expanded={showFilters}
+          className={`p-2.5 rounded-[var(--input-radius)] border transition-colors cursor-pointer focus-ring ${
             showFilters
               ? "bg-green-light border-green-accent text-green-primary"
-              : "bg-bg-card border-bg-subtle text-text-secondary hover:text-text-primary"
+              : "bg-input-bg border-input-border text-text-secondary hover:text-text-primary"
           }`}
         >
           <SlidersHorizontal className="w-4 h-4" />
@@ -155,7 +155,7 @@ export default function TransactionsPage() {
 
       {/* Filter Panel */}
       {showFilters && (
-        <Card className="space-y-4 animate-fade-up">
+        <Card bordered className="space-y-4 animate-fade-up">
           {/* Category filter */}
           <div>
             <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-2">
@@ -164,7 +164,7 @@ export default function TransactionsPage() {
             <div className="flex flex-wrap gap-1.5">
               <button
                 onClick={() => setCategoryFilter("all")}
-                className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors cursor-pointer focus-ring ${
                   categoryFilter === "all"
                     ? "bg-green-accent text-text-inverse"
                     : "bg-bg-subtle text-text-secondary hover:text-text-primary"
@@ -176,7 +176,7 @@ export default function TransactionsPage() {
                 <button
                   key={cat.id}
                   onClick={() => setCategoryFilter(cat.id)}
-                  className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors cursor-pointer focus-ring ${
                     categoryFilter === cat.id
                       ? "bg-green-accent text-text-inverse"
                       : "bg-bg-subtle text-text-secondary hover:text-text-primary"
@@ -198,7 +198,7 @@ export default function TransactionsPage() {
                 <button
                   key={s}
                   onClick={() => setStatusFilter(s)}
-                  className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors capitalize cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors capitalize cursor-pointer focus-ring ${
                     statusFilter === s
                       ? "bg-green-accent text-text-inverse"
                       : "bg-bg-subtle text-text-secondary hover:text-text-primary"
@@ -220,7 +220,7 @@ export default function TransactionsPage() {
                 <button
                   key={f}
                   onClick={() => toggleSort(f)}
-                  className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors capitalize inline-flex items-center gap-1 cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-sm text-xs font-body font-medium transition-colors capitalize inline-flex items-center gap-1 cursor-pointer focus-ring ${
                     sortField === f
                       ? "bg-green-accent text-text-inverse"
                       : "bg-bg-subtle text-text-secondary hover:text-text-primary"
@@ -239,7 +239,7 @@ export default function TransactionsPage() {
 
       {/* Transaction List */}
       {grouped.length === 0 ? (
-        <Card className="text-center py-8">
+        <Card bordered className="text-center py-8">
           <p className="text-text-tertiary font-body text-sm">
             No transactions match your filters.
           </p>
@@ -251,13 +251,13 @@ export default function TransactionsPage() {
               <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-2 px-1">
                 {formatDate(date)}
               </p>
-              <Card className="divide-y divide-bg-subtle p-0">
+              <Card bordered className="divide-y divide-border-divider p-0">
                 {txns.map((tx) => {
                   const cat = getCategoryMeta(tx.category);
                   return (
                     <div
                       key={tx.id}
-                      className="flex items-center gap-3 px-4 py-3"
+                      className="flex items-center gap-3 px-4 min-h-[var(--row-min-height)] py-3"
                     >
                       {/* Category dot */}
                       <div
@@ -289,7 +289,7 @@ export default function TransactionsPage() {
 
                       {/* Amount */}
                       <span
-                        className={`font-display font-semibold text-sm flex-shrink-0 ${
+                        className={`font-display font-semibold text-sm flex-shrink-0 tabular-nums ${
                           tx.amount > 0 ? "text-positive" : "text-text-primary"
                         }`}
                       >

@@ -130,4 +130,115 @@ Summary of each development session: what was accomplished, decisions made, and 
 
 ---
 
+## Session 4 — 2026-03-15 (Parallel UI Polish)
+
+**Goal**: Fix dark mode token gaps, accessibility violations, breakpoint mismatch, zero test coverage, and landing page polish — using 5 parallel worktree agents.
+
+### What Was Accomplished
+
+**Stream 1 — CSS Tokens + Dark Mode**
+- Added `--caution-text` token (light: `#b8860b`, dark: `#E9C46A`) + registered in `@theme inline`
+- Added dark mode overrides for `--btn-destructive-text` (`#E8E4DF`) and `--caution-soft`
+- Added `.grain-overlay` CSS class with `mix-blend-mode: multiply` (light) / `overlay` (dark)
+- Fixed Badge caution variant: replaced hardcoded `text-[#b8860b] dark:text-caution` with `text-caution-text`
+
+**Stream 2 — Accessibility**
+- Added skip-to-content link in root layout (sr-only, visible on focus)
+- Added sr-only labels + ids to transaction search input and ask search input
+- Added `aria-label="Toggle filters"` + `aria-expanded` to transaction filter button
+
+**Stream 3 — Breakpoint Alignment**
+- Sidebar: `hidden lg:flex` → `hidden min-[1200px]:flex` (spec says 1200px, not 1024px)
+- NavRail: `hidden md:flex lg:hidden` → `hidden md:flex min-[1200px]:hidden`
+- App layout: `lg:ml-*` → `min-[1200px]:ml-*`, `lg:px-*` → `min-[1200px]:px-*`
+- Applied grain-overlay class to DarkGrainOverlay, added `id="main-content"` to `<main>`
+
+**Stream 4 — Testing Infrastructure**
+- Installed vitest + @vitejs/plugin-react + jsdom
+- Created `vitest.config.ts` with path aliases
+- 30 tests for `data/helpers.ts` (calculateNetWorth, groupAccounts, getSpendingByCategory, getRecentTransactions, getMonthlyTotals)
+- 24 tests for `lib/utils.ts` (cn, formatCurrency, getProgressColor, getProgressPercentage)
+- All 108 tests pass (including 54 pre-existing from previous session's data layer)
+
+**Stream 5 — Landing Page Polish**
+- Footer links: `<span>` → `<a href="#">` with focus-ring class
+- Email input: added sr-only label + id
+- Submit button: added `type="submit"`
+
+### Decisions Made
+- Vitest over Jest for testing (see decisions.md)
+- `--caution-text` token for dark-mode-aware badge colors (see decisions.md)
+- `min-[1200px]:` arbitrary breakpoint instead of overriding `lg:` (see decisions.md)
+
+### Patterns Discovered
+- Parallel worktree agents can run 5 independent streams simultaneously, but worktree cleanup is critical — leftover `.next/` build artifacts pollute ESLint
+- CSS variable swap pattern eliminates `dark:` prefix proliferation — one token definition handles both modes
+- Vitest with `@` path alias resolves cleanly when mirroring tsconfig paths
+
+### Open Items
+- Visual browser review (dark mode toggle, responsive breakpoints) — not yet done
+- Component-level React tests (with @testing-library/react) — not yet set up
+- Accessibility audit with axe-core or Lighthouse — not yet run
+- See `docs/TODO.md` for full deferred items
+
+### Files Created (3 new files)
+- `vitest.config.ts`
+- `src/data/__tests__/helpers.test.ts`
+- `src/lib/__tests__/utils.test.ts`
+
+### Files Modified (10 files)
+- `package.json` — added test scripts + dev deps
+- `src/app/globals.css` — caution-text token, grain-overlay class, dark mode tokens
+- `src/components/ui/Badge.tsx` — token-based caution variant
+- `src/app/layout.tsx` — skip-to-content link
+- `src/app/app/layout.tsx` — breakpoint alignment, grain-overlay class, main-content id
+- `src/components/app/Sidebar.tsx` — 1200px breakpoint
+- `src/components/app/NavRail.tsx` — 1200px breakpoint
+- `src/app/app/transactions/page.tsx` — search label, filter aria attributes
+- `src/app/app/ask/page.tsx` — search label
+- `src/app/page.tsx` — footer links, email label, submit button type
+
+---
+
+## Session 5 — 2026-03-15 (NavRail/Sidebar Overlap Fix)
+
+**Goal**: Fix the NavRail/Sidebar overlap bug where both navigation components rendered simultaneously at ≥1200px viewport widths.
+
+### What Was Accomplished
+
+- Diagnosed Tailwind v4 arbitrary breakpoint cascade ordering bug: `min-[1200px]:hidden` was generated before `md:flex` in the CSS output, so `md:flex` won at all widths ≥768px
+- Attempted fix via `@theme { --breakpoint-desktop: 1200px; }` — Turbopack did not generate any CSS for the named breakpoint
+- Implemented working fix: plain CSS `@media (min-width: 1200px)` rules in `globals.css` targeting `.sidebar`, `.nav-rail`, and `#main-content`
+- Verified all three nav tiers visually in Playwright:
+  - Mobile (375px): BottomNav only
+  - Tablet (900px): NavRail only
+  - Boundary (1199px): NavRail only
+  - Desktop (1300px): Sidebar only
+- Verified dark mode toggle, Goals, Envelopes, and landing page — all clean
+- Build, lint, and all 54 tests pass
+
+### Decisions Made
+- Plain CSS `@media` rules for 1200px breakpoint instead of Tailwind utilities (see decisions.md — updated existing entry)
+
+### Patterns Discovered
+- Tailwind v4 with Turbopack has unreliable CSS generation for both arbitrary breakpoints (`min-[Xpx]:`) and `@theme`-registered named breakpoints. Plain CSS `@media` rules are the reliable fallback for custom breakpoints.
+- Adding semantic CSS class names (`.sidebar`, `.nav-rail`) to components enables clean CSS-level targeting without needing Tailwind-specific selectors.
+
+### Errors Encountered
+- Tailwind v4 arbitrary breakpoint cascade ordering bug (see error-log.md)
+- `@theme { --breakpoint-desktop }` not recognized by Turbopack (see error-log.md)
+
+### Files Modified (4 files)
+- `src/app/globals.css` — added `@media (min-width: 1200px)` rules for three-tier nav
+- `src/components/app/Sidebar.tsx` — added `.sidebar` class, removed broken `min-[1200px]:flex`
+- `src/components/app/NavRail.tsx` — added `.nav-rail` class, removed broken `min-[1200px]:hidden`
+- `src/app/app/layout.tsx` — simplified margin/padding classes (desktop overrides now in CSS)
+
+### Open Items
+- Component-level React tests (with @testing-library/react) — not yet set up
+- Accessibility audit with axe-core or Lighthouse — not yet run
+- See `docs/TODO.md` for full deferred items
+
+---
+
 <!-- Entries will be appended below by Claude Code. Do not delete this file. -->

@@ -1,8 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/Card";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { accounts } from "@/data/accounts";
-import { groupAccounts } from "@/data/helpers";
+import { groupAccounts, calculateNetWorth } from "@/data/helpers";
 import { formatCurrency } from "@/lib/utils";
 import {
   Landmark,
@@ -29,19 +30,18 @@ const typeIcons: Record<AccountType, typeof Landmark> = {
 
 export function AccountsList() {
   const groups = groupAccounts(accounts);
+  const { total } = calculateNetWorth(accounts);
 
   return (
     <div className="space-y-4">
-      <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium">
-        Accounts
-      </p>
+      <SectionHeader title="Accounts" total={formatCurrency(total)} />
 
       {groups.map((group) => {
         const Icon = typeIcons[group.type] ?? Landmark;
         const isLiability = group.total < 0;
 
         return (
-          <Card key={group.type}>
+          <Card key={group.type} bordered>
             {/* Group header */}
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
@@ -51,7 +51,7 @@ export function AccountsList() {
                 </span>
               </div>
               <span
-                className={`font-display font-semibold text-sm ${
+                className={`font-display font-semibold text-sm tabular-nums ${
                   isLiability ? "text-warning" : "text-text-primary"
                 }`}
               >
@@ -61,11 +61,11 @@ export function AccountsList() {
             </div>
 
             {/* Account rows */}
-            <div className="divide-y divide-bg-subtle">
+            <div className="divide-y divide-border-divider">
               {group.accounts.map((account) => (
                 <div
                   key={account.id}
-                  className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0"
+                  className="flex items-center justify-between min-h-[var(--row-min-height)] py-2.5 first:pt-0 last:pb-0"
                 >
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-body text-text-primary truncate">
@@ -77,7 +77,7 @@ export function AccountsList() {
                     </p>
                   </div>
                   <span
-                    className={`font-display font-semibold text-sm flex-shrink-0 ${
+                    className={`font-display font-semibold text-sm flex-shrink-0 tabular-nums ${
                       account.balance < 0 ? "text-warning" : "text-text-primary"
                     }`}
                   >

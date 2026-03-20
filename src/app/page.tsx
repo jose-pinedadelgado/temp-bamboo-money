@@ -407,12 +407,14 @@ export default function LandingPage() {
             className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto scroll-reveal"
             onSubmit={(e) => e.preventDefault()}
           >
+            <label htmlFor="waitlist-email" className="sr-only">Email address</label>
             <input
+              id="waitlist-email"
               type="email"
               placeholder={t("cta.placeholder")}
               className="flex-1 px-4 py-3 rounded-md bg-text-inverse/10 border border-text-inverse/20 text-text-inverse placeholder:text-text-inverse/40 font-body focus:outline-none focus:ring-2 focus:ring-green-accent/50"
             />
-            <Button size="md" className="whitespace-nowrap">
+            <Button type="submit" size="md" className="whitespace-nowrap">
               {t("cta.button")}
             </Button>
           </form>
@@ -420,9 +422,9 @@ export default function LandingPage() {
           <div className="mt-20 pt-8 border-t border-text-inverse/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-inverse/40 font-body">
             <p>{t("cta.builtBy")}</p>
             <div className="flex gap-6">
-              <span className="hover:text-text-inverse/60 cursor-pointer">{t("cta.privacy")}</span>
-              <span className="hover:text-text-inverse/60 cursor-pointer">{t("cta.terms")}</span>
-              <span className="hover:text-text-inverse/60 cursor-pointer">{t("cta.contact")}</span>
+              <a href="#" className="hover:text-text-inverse/60 transition-colors focus-ring rounded-sm">{t("cta.privacy")}</a>
+              <a href="#" className="hover:text-text-inverse/60 transition-colors focus-ring rounded-sm">{t("cta.terms")}</a>
+              <a href="#" className="hover:text-text-inverse/60 transition-colors focus-ring rounded-sm">{t("cta.contact")}</a>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
 import { accounts } from "@/data/accounts";
 import { calculateNetWorth, getMonthlyTotals } from "@/data/helpers";
 import { transactions } from "@/data/transactions";
@@ -22,20 +23,20 @@ export function NetWorthSummary() {
   const change = total - prevMonth;
 
   return (
-    <Card hoverable>
+    <Card bordered>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium">
             Net Worth
           </p>
-          <p className="font-display font-bold text-3xl text-green-deep mt-1">
+          <p className="font-display font-bold text-3xl text-green-deep mt-1 tabular-nums">
             {formatCurrency(total)}
           </p>
         </div>
-        <div className="flex items-center gap-1 text-positive text-sm font-body font-medium bg-green-light px-2 py-1 rounded-sm">
-          <ArrowUpRight className="w-3.5 h-3.5" />
+        <Badge variant="positive">
+          <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" />
           {formatCurrency(change, true)}
-        </div>
+        </Badge>
       </div>
 
       {/* Sparkline */}
@@ -58,13 +59,13 @@ export function NetWorthSummary() {
       </p>
 
       {/* Assets / Liabilities breakdown */}
-      <div className="mt-4 pt-4 border-t border-bg-subtle grid grid-cols-2 gap-4">
+      <div className="mt-4 pt-4 border-t border-border-divider grid grid-cols-2 gap-4">
         <div>
           <div className="flex items-center gap-1.5 mb-1">
             <TrendingUp className="w-3.5 h-3.5 text-positive" />
             <span className="text-xs text-text-tertiary font-body">Assets</span>
           </div>
-          <p className="font-display font-semibold text-lg text-text-primary">
+          <p className="font-display font-semibold text-lg text-text-primary tabular-nums">
             {formatCurrency(assets)}
           </p>
         </div>
@@ -73,18 +74,18 @@ export function NetWorthSummary() {
             <TrendingDown className="w-3.5 h-3.5 text-warning" />
             <span className="text-xs text-text-tertiary font-body">Liabilities</span>
           </div>
-          <p className="font-display font-semibold text-lg text-text-primary">
+          <p className="font-display font-semibold text-lg text-text-primary tabular-nums">
             {formatCurrency(liabilities)}
           </p>
         </div>
       </div>
 
       {/* Cash flow this month */}
-      <div className="mt-4 pt-4 border-t border-bg-subtle">
+      <div className="mt-4 pt-4 border-t border-border-divider">
         <div className="flex items-center justify-between">
           <span className="text-xs text-text-tertiary font-body">March cash flow</span>
           <span
-            className={`font-display font-semibold text-sm ${
+            className={`font-display font-semibold text-sm tabular-nums ${
               monthTotals.net >= 0 ? "text-positive" : "text-warning"
             }`}
           >

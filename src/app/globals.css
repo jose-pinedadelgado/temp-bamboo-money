@@ -4,50 +4,153 @@
 @variant dark (&:where(.dark, .dark *));
 
 /* ─── Design Tokens ───────────────────────────────────── */
+/* Color palette: Organic Luxury (warm ivory, forest green, gold)
+   Structural tokens: adopted from bamboo-money-design-tokens-v2.json
+   Font: Fraunces (display) + Plus Jakarta Sans (body) — non-negotiable */
 
 :root {
-  /* Background & Surfaces */
+  /* ── Surfaces ── */
   --bg-primary: #FAF8F5;
   --bg-card: #FFFFFF;
   --bg-subtle: #F3F0EB;
   --bg-section: #EDE9E3;
+  --bg-elevated: #FFFFFF;
 
-  /* Primary Brand */
+  /* ── Primary Brand ── */
   --green-deep: #1B4332;
   --green-primary: #2D6A4F;
   --green-accent: #52B788;
   --green-light: #D8F3DC;
   --green-glow: rgba(82, 183, 136, 0.15);
 
-  /* Warm Accents */
+  /* ── Warm Accents ── */
   --gold: #D4A574;
   --gold-light: #F0DFC8;
   --sand: #C4B5A0;
 
-  /* Text */
+  /* ── Text ── */
   --text-primary: #1B1B1B;
   --text-secondary: #6B6B6B;
   --text-tertiary: #9B9B9B;
   --text-inverse: #FAF8F5;
+  --text-disabled: #BFBAB4;
 
-  /* Semantic */
+  /* ── Borders ── */
+  --border-default: #E5DFD8;
+  --border-strong: #C4B5A0;
+  --border-focus: #2D6A4F;
+  --border-divider: #EDE9E3;
+
+  /* ── Semantic States ── */
   --positive: #52B788;
+  --positive-soft: #D8F3DC;
   --caution: #E9C46A;
+  --caution-soft: #FDF6E3;
+  --caution-text: #b8860b;
   --warning: #E76F51;
+  --warning-soft: #FEF0EC;
   --info: #457B9D;
+  --info-soft: #E8F0F6;
 
-  /* Shadows */
-  --shadow-card: 0 1px 3px rgba(27, 67, 50, 0.04), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-elevated: 0 4px 12px rgba(27, 67, 50, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  /* ── Navigation ── */
+  --nav-bg: #1B4332;
+  --nav-item-default: #D8F3DC;
+  --nav-item-active: #FAF8F5;
+  --nav-item-hover: #E8F0EB;
+  --nav-indicator: #D4A574;
+
+  /* ── Buttons ── */
+  --btn-primary-bg: #D4A574;
+  --btn-primary-text: #FAF8F5;
+  --btn-secondary-bg: #FFFFFF;
+  --btn-secondary-text: #1B4332;
+  --btn-secondary-border: #C4B5A0;
+  --btn-destructive-bg: #E76F51;
+  --btn-destructive-text: #FAF8F5;
+
+  /* ── Inputs ── */
+  --input-bg: #FFFFFF;
+  --input-text: #1B1B1B;
+  --input-placeholder: #9B9B9B;
+  --input-border: #C4B5A0;
+  --input-border-focus: #2D6A4F;
+  --input-bg-disabled: #F3F0EB;
+
+  /* ── Shadows (warm green tint) ── */
+  --shadow-card: 0 1px 2px rgba(27, 67, 50, 0.05);
+  --shadow-elevated: 0 4px 10px rgba(27, 67, 50, 0.08);
   --shadow-hover: 0 8px 24px rgba(27, 67, 50, 0.10), 0 4px 8px rgba(0, 0, 0, 0.04);
+
+  /* ── Layout ── */
+  --content-max-width: 1280px;
+  --sidebar-width: 264px;
+  --nav-rail-width: 88px;
+  --secondary-panel-width: 320px;
+  --bottom-nav-height: 72px;
+  --section-gap: 24px;
+  --card-padding: 16px;
+  --page-padding-mobile: 16px;
+  --page-padding-desktop: 24px;
+
+  /* ── Component Dimensions ── */
+  --btn-height-sm: 36px;
+  --btn-height-md: 44px;
+  --btn-height-lg: 52px;
+  --btn-padding-sm: 12px;
+  --btn-padding-md: 16px;
+  --btn-padding-lg: 20px;
+  --btn-radius: 10px;
+  --input-height: 44px;
+  --input-radius: 10px;
+  --input-padding: 12px;
+  --card-radius: 16px;
+  --card-border-width: 1px;
+  --row-min-height: 56px;
+  --bottom-nav-icon: 24px;
+  --bottom-nav-label: 12px;
+
+  /* ── Spacing Scale ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 40px;
+
+  /* ── Radius ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Border Width ── */
+  --border-thin: 1px;
+  --border-thick: 2px;
+
+  /* ── Motion ── */
+  --motion-fast: 120ms;
+  --motion-normal: 180ms;
+  --motion-slow: 240ms;
+  --motion-easing: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ── Z-Index Scale ── */
+  --z-base: 0;
+  --z-sticky: 200;
+  --z-dropdown: 400;
+  --z-drawer: 800;
+  --z-modal: 1000;
+  --z-toast: 1100;
 }
 
-/* Dark mode tokens — scoped to app shell only (landing page stays light) */
+/* ── Dark Mode — scoped to app shell only (landing stays light) ── */
 #app-shell.dark {
   --bg-primary: #1A1D21;
   --bg-card: #242830;
   --bg-subtle: #2C3038;
   --bg-section: #1E2126;
+  --bg-elevated: #2C3038;
 
   --green-deep: #6EAE8C;
   --green-primary: #40916C;
@@ -59,60 +162,165 @@
   --text-primary: #E8E4DF;
   --text-secondary: #B5AFA9;
   --text-tertiary: #918A84;
+  --text-disabled: #5E5850;
 
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
-  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --border-default: #3A3E46;
+  --border-strong: #52575F;
+  --border-focus: #52B788;
+  --border-divider: #2C3038;
+
+  --positive-soft: rgba(82, 183, 136, 0.12);
+  --caution-soft: rgba(233, 196, 106, 0.12);
+  --warning-soft: rgba(231, 111, 81, 0.12);
+  --info-soft: rgba(69, 123, 157, 0.12);
+
+  --nav-bg: #141816;
+  --nav-item-default: #918A84;
+  --nav-item-active: #E8E4DF;
+  --nav-item-hover: #B5AFA9;
+  --nav-indicator: #D4A574;
+
+  --btn-primary-bg: #D4A574;
+  --btn-primary-text: #1A1D21;
+  --btn-secondary-bg: #2C3038;
+  --btn-secondary-text: #E8E4DF;
+  --btn-secondary-border: #52575F;
+  --btn-destructive-bg: #E76F51;
+  --btn-destructive-text: #E8E4DF;
+
+  --caution-text: #E9C46A;
+  --caution-soft: rgba(233, 196, 106, 0.15);
+
+  --input-bg: #2C3038;
+  --input-text: #E8E4DF;
+  --input-placeholder: #918A84;
+  --input-border: #3A3E46;
+  --input-border-focus: #52B788;
+  --input-bg-disabled: #1E2126;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-elevated: 0 4px 10px rgba(0, 0, 0, 0.25);
   --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ─── Tailwind Theme ──────────────────────────────────── */
 
 @theme inline {
+  /* Surfaces */
   --color-bg-primary: var(--bg-primary);
   --color-bg-card: var(--bg-card);
   --color-bg-subtle: var(--bg-subtle);
   --color-bg-section: var(--bg-section);
+  --color-bg-elevated: var(--bg-elevated);
 
+  /* Brand */
   --color-green-deep: var(--green-deep);
   --color-green-primary: var(--green-primary);
   --color-green-accent: var(--green-accent);
   --color-green-light: var(--green-light);
   --color-green-glow: var(--green-glow);
 
+  /* Accents */
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-sand: var(--sand);
 
+  /* Text */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
   --color-text-inverse: var(--text-inverse);
+  --color-text-disabled: var(--text-disabled);
 
+  /* Borders */
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-focus: var(--border-focus);
+  --color-border-divider: var(--border-divider);
+
+  /* Semantic */
   --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
   --color-caution: var(--caution);
+  --color-caution-soft: var(--caution-soft);
+  --color-caution-text: var(--caution-text);
   --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
   --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
 
+  /* Navigation */
+  --color-nav-bg: var(--nav-bg);
+  --color-nav-item-default: var(--nav-item-default);
+  --color-nav-item-active: var(--nav-item-active);
+  --color-nav-item-hover: var(--nav-item-hover);
+  --color-nav-indicator: var(--nav-indicator);
+
+  /* Buttons */
+  --color-btn-primary-bg: var(--btn-primary-bg);
+  --color-btn-primary-text: var(--btn-primary-text);
+  --color-btn-secondary-bg: var(--btn-secondary-bg);
+  --color-btn-secondary-text: var(--btn-secondary-text);
+  --color-btn-secondary-border: var(--btn-secondary-border);
+  --color-btn-destructive-bg: var(--btn-destructive-bg);
+  --color-btn-destructive-text: var(--btn-destructive-text);
+
+  /* Inputs */
+  --color-input-bg: var(--input-bg);
+  --color-input-text: var(--input-text);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-input-border: var(--input-border);
+  --color-input-border-focus: var(--input-border-focus);
+  --color-input-bg-disabled: var(--input-bg-disabled);
+
+  /* Shadows */
   --shadow-card: var(--shadow-card);
   --shadow-elevated: var(--shadow-elevated);
   --shadow-hover: var(--shadow-hover);
 
+  /* Fonts */
   --font-display: var(--font-fraunces);
   --font-body: var(--font-jakarta);
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
 }
 
 /* ─── Base Styles ─────────────────────────────────────── */
+
+html {
+  overflow-y: overlay;
+  scrollbar-gutter: auto;
+}
 
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Thin overlay scrollbar — removes the thick gutter */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
 }
 
 /* Grain texture overlay — backgrounds only, never on cards */
@@ -122,11 +330,51 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.03;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
+}
+
+/* Grain overlay — blend mode adapts in dark mode */
+.grain-overlay {
+  mix-blend-mode: multiply;
+}
+
+#app-shell.dark .grain-overlay {
+  mix-blend-mode: overlay;
+}
+
+/* ─── Three-Tier Navigation Breakpoints ──────────────── */
+/* Mobile (<768px): bottom nav only (handled by md:hidden on BottomNav)
+   Tablet (768–1199px): nav rail only
+   Desktop (≥1200px): sidebar only */
+
+/* Sidebar: hidden below 1200px, flex at ≥1200px */
+@media (min-width: 1200px) {
+  .sidebar {
+    display: flex;
+  }
+  .nav-rail {
+    display: none;
+  }
+  /* Main content margin shifts from rail to sidebar width */
+  #main-content {
+    margin-left: var(--sidebar-width);
+  }
+  /* Wider padding on desktop */
+  #main-content > div {
+    padding-left: var(--space-3xl);
+    padding-right: var(--space-3xl);
+  }
+}
+
+/* ─── Focus Ring Utility ─────────────────────────────── */
+/* WCAG AA-compliant focus indicator for keyboard navigation */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
 }
 
 /* ─── Animations ──────────────────────────────────────── */
@@ -144,7 +392,7 @@ body::before {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.4s ease-out both;
+  animation: fade-up 0.4s var(--motion-easing) both;
 }
 
 /* Stagger delays */
@@ -200,7 +448,7 @@ body::before {
 }
 
 .animate-progress-fill {
-  animation: progress-fill 0.6s ease-out both;
+  animation: progress-fill 0.6s var(--motion-easing) both;
 }
 
 /* Number count-up effect — applied via JS */
@@ -209,10 +457,10 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Card hover — spring easing */
+/* Card hover — uses standardized motion timing */
 .card-hover {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform var(--motion-slow) var(--motion-easing),
+              box-shadow var(--motion-slow) var(--motion-easing);
 }
 
 .card-hover:hover {
@@ -231,17 +479,40 @@ body::before {
 }
 
 .animate-view-enter {
-  animation: view-enter 0.2s ease-out both;
+  animation: view-enter var(--motion-normal) var(--motion-easing) both;
 }
 
 /* Scroll-triggered animation — starts hidden */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition: opacity 0.4s var(--motion-easing), transform 0.4s var(--motion-easing);
 }
 
 .scroll-reveal.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ─── Reduced Motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-bamboo-grow,
+  .animate-leaf-sprout,
+  .animate-progress-fill,
+  .animate-view-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card-hover {
+    transition: none;
+  }
 }

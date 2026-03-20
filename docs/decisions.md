@@ -108,4 +108,60 @@ Architectural, design, and product decisions with context and rationale. Read th
 
 ---
 
+## 2026-03-15 — Keep Organic Luxury Palette Over New Token V2 Cool Palette
+**Context**: Three new design documents (ui-spec, reserved, design-tokens-v2) proposed a shift to navy/cool-gray institutional colors with Inter font
+**Decision**: Keep warm organic palette (forest green, ivory, gold, Fraunces + Jakarta Sans), adopt only structural tokens from v2 (layout dimensions, component heights, spacing scale, motion timing, z-index, border system)
+**Alternatives Considered**: Full adoption of v2 tokens (navy #12344D, cool gray #F6F8FA, Inter font), hybrid with v2 colors but keeping fonts
+**Rationale**: Research shows Robinhood, Wealthsimple, and Monarch are all moving *toward* serifs and warmth. Inter would make the app generic. Forest green carries trust equivalent to navy. The warm palette is Bamboo Money's strongest brand differentiator. Structural improvements from v2 are adopted because they're palette-agnostic.
+
+---
+
+## 2026-03-15 — Three-Tier Responsive Navigation (Sidebar / Rail / Bottom Nav)
+**Context**: New UI spec defined a medium-width nav rail pattern; current app jumped from full sidebar to bottom nav
+**Decision**: Desktop (≥1200px) gets 264px sidebar, tablet (768–1199px) gets 88px nav rail, mobile (<768px) gets 72px bottom nav
+**Alternatives Considered**: Keeping two-tier (sidebar + bottom nav), collapsible sidebar on medium widths
+**Rationale**: The nav rail fills a real usability gap — at tablet widths the full sidebar consumed too much content space, but bottom nav hides navigation prematurely. The three tiers are standard in mature product design (Material Design, Apple HIG).
+
+---
+
+## 2026-03-15 — Border-Driven Cards as Default, Shadows as Elevation
+**Context**: New UI spec emphasizes "borders and spacing should do more work than heavy shadows"
+**Decision**: Cards default to `bordered` variant (1px border + light shadow). `elevated` variant for overlays/popovers. Shadows remain warm-tinted but lighter than before.
+**Alternatives Considered**: Shadow-only (current), border-only (too flat), mixed without system
+**Rationale**: Borders create cleaner visual hierarchy especially in dense financial data views. Lighter shadows reduce visual noise. The spec's "structured density" principle is better served by borders than floating-card excess.
+
+---
+
+## 2026-03-15 — Standardized Design Token Architecture
+**Context**: Original globals.css had colors and shadows but lacked structural tokens
+**Decision**: Added 40+ new CSS custom properties: borders, navigation, button, input colors, component dimensions (heights, padding, radius), spacing scale, motion timing, z-index scale, layout constants
+**Alternatives Considered**: Keeping minimal token set, using Tailwind config instead of CSS variables
+**Rationale**: The new UI spec requires token-driven implementation. CSS variables work with both Tailwind and raw CSS, cascade through dark mode, and provide a single source of truth. This enables systematic component development without magic numbers.
+
+---
+
+## 2026-03-15 — Vitest as Test Framework
+**Context**: Zero test coverage; need to test pure helper functions and utilities
+**Decision**: Vitest with jsdom environment, `@vitejs/plugin-react`, path aliases matching tsconfig. Tests for `data/helpers.ts` (5 functions, 30 tests) and `lib/utils.ts` (4 functions, 24 tests).
+**Alternatives Considered**: Jest (heavier config with Next.js/ESM), Bun test, no testing yet
+**Rationale**: Vitest is zero-config with Vite, natively supports ESM and TypeScript path aliases, and runs in <2s. Pure function tests establish a regression safety net before any refactoring. 54 tests cover all edge cases (empty arrays, boundary values, sign conventions).
+
+---
+
+## 2026-03-15 — Caution Text Token for Dark Mode Readability
+**Context**: Badge caution variant used hardcoded `text-[#b8860b]` with a separate `dark:text-caution` override
+**Decision**: New `--caution-text` token (light: `#b8860b`, dark: `#E9C46A`) auto-swaps via CSS variable scoping. Badge just uses `text-caution-text`.
+**Alternatives Considered**: Keep `dark:` prefix pattern, use single caution color for both modes
+**Rationale**: CSS variable swap is the project's established dark mode pattern (see Decision: Dark Mode via CSS Variable Swap). Adding another hardcoded `dark:` prefix contradicts that architecture. The dark-mode amber (`#E9C46A`) is more readable on dark backgrounds than the light-mode dark-goldenrod.
+
+---
+
+## 2026-03-15 — Breakpoint Alignment to 1200px via Plain CSS @media Rules
+**Context**: UI spec defines sidebar at ≥1200px, but Tailwind's `lg:` breakpoint is 1024px. Initial attempt using `min-[1200px]:` arbitrary breakpoint syntax failed due to Tailwind v4/Turbopack CSS cascade ordering bug — arbitrary breakpoints were generated before standard breakpoints, so `md:flex` overrode `min-[1200px]:hidden`. A second attempt using `@theme { --breakpoint-desktop: 1200px; }` also failed — Turbopack did not generate any CSS for the named breakpoint.
+**Decision**: Use plain CSS `@media (min-width: 1200px)` rules in `globals.css` targeting `.sidebar`, `.nav-rail`, and `#main-content` to control three-tier nav visibility and layout margins.
+**Alternatives Considered**: `min-[1200px]:` arbitrary values (cascade ordering bug), `@theme` named breakpoint (not generated by Turbopack), overriding `lg:` globally (breaks landing page grid)
+**Rationale**: Plain CSS media queries have guaranteed cascade ordering and work with any build tool. Components use semantic CSS class names (`.sidebar`, `.nav-rail`) which are self-documenting. The approach is build-tool-agnostic and avoids Tailwind v4 edge cases.
+
+---
+
 <!-- Future decisions will be appended below by Claude Code. Do not delete existing entries. -->

@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Badge } from "@/components/ui/Badge";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { envelopes } from "@/data/mock-data";
 import { formatCurrency, getProgressPercentage } from "@/lib/utils";
 import { useTranslations } from "next-intl";
@@ -47,14 +48,14 @@ export default function EnvelopesView() {
   const groups = ["essentials", "lifestyle", "growth"] as const;
 
   return (
-    <div className="space-y-8 animate-view-enter">
+    <div className="space-y-[var(--section-gap)] animate-view-enter">
       {/* ─── Header ─────────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-bold text-2xl text-green-deep">
           {t("title")}
         </h1>
         <p className="text-sm text-text-secondary font-body mt-1">
-          <span className="font-display font-semibold text-text-primary">
+          <span className="font-display font-semibold text-text-primary tabular-nums">
             {formatCurrency(totalRemaining)}
           </span>{" "}
           {t("remaining")} &middot; {t("daysLeft", { days: 21 })}
@@ -68,7 +69,7 @@ export default function EnvelopesView() {
           <input
             type="text"
             placeholder={t("search")}
-            className="w-full pl-9 pr-4 py-2.5 rounded-md bg-bg-subtle text-sm font-body text-text-primary placeholder:text-text-tertiary border-none focus:outline-none focus:ring-2 focus:ring-green-accent/30"
+            className="w-full h-[var(--input-height)] pl-9 pr-[var(--input-padding)] rounded-[var(--input-radius)] bg-input-bg text-sm font-body text-input-text placeholder:text-input-placeholder border border-input-border focus:outline-none focus:ring-2 focus:ring-border-focus/30 focus:border-border-focus transition-colors"
           />
         </div>
       </div>
@@ -82,9 +83,7 @@ export default function EnvelopesView() {
             className="animate-fade-up"
             style={{ animationDelay: `${(gi + 2) * 50}ms` }}
           >
-            <p className="text-xs uppercase tracking-[0.05em] text-text-secondary font-body font-medium mb-3">
-              {t(`groups.${group}`)}
-            </p>
+            <SectionHeader title={t(`groups.${group}`)} />
 
             <div className="space-y-3">
               {groupEnvelopes.map((env) => {
@@ -95,9 +94,9 @@ export default function EnvelopesView() {
                 const isPaid = !!env.paidDate;
 
                 return (
-                  <Card key={env.id} hoverable>
+                  <Card key={env.id} hoverable bordered>
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-md bg-green-light flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 rounded-[var(--radius-md)] bg-green-light flex items-center justify-center flex-shrink-0">
                         <Icon className="w-4.5 h-4.5 text-green-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -108,7 +107,7 @@ export default function EnvelopesView() {
                         {isGrowth ? (
                           <div className="mt-1">
                             <p className="text-sm font-body text-text-secondary">
-                              <span className="font-display font-semibold text-text-primary">
+                              <span className="font-display font-semibold text-text-primary tabular-nums">
                                 {formatCurrency(env.budgeted)}
                               </span>{" "}
                               {t("allocatedThisMonth")}
@@ -122,13 +121,13 @@ export default function EnvelopesView() {
                         ) : (
                           <>
                             <div className="flex items-baseline gap-1.5 mt-1">
-                              <span className="font-display font-semibold text-base text-green-deep">
+                              <span className="font-display font-semibold text-base text-green-deep tabular-nums">
                                 {formatCurrency(remaining)}
                               </span>
                               <span className="text-xs text-text-tertiary font-body">
                                 {t("remaining")}
                               </span>
-                              <span className="text-xs text-text-tertiary font-body ml-auto">
+                              <span className="text-xs text-text-tertiary font-body ml-auto tabular-nums">
                                 {t("of", { amount: formatCurrency(env.budgeted) })}
                               </span>
                             </div>
@@ -170,7 +169,7 @@ export default function EnvelopesView() {
       })}
 
       {/* ─── Add Envelope ───────────────────────── */}
-      <button className="w-full py-4 border-2 border-dashed border-sand/50 rounded-lg text-sm font-body text-text-secondary hover:border-green-accent hover:text-green-primary transition-colors flex items-center justify-center gap-2 cursor-pointer">
+      <button className="w-full py-4 border-2 border-dashed border-border-strong/50 rounded-lg text-sm font-body text-text-secondary hover:border-green-accent hover:text-green-primary transition-colors flex items-center justify-center gap-2 cursor-pointer focus-ring">
         <Plus className="w-4 h-4" />
         {t("addEnvelope")}
       </button>

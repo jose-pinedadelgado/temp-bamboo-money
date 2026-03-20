@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { InsightCard } from "@/components/ui/InsightCard";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { monthlySummary } from "@/data/mock-data";
 import { formatCurrency } from "@/lib/utils";
 import { useTranslations } from "next-intl";
@@ -53,7 +54,7 @@ export default function AskBambooView() {
   }
 
   return (
-    <div className="space-y-8 animate-view-enter">
+    <div className="space-y-[var(--section-gap)] animate-view-enter">
       {/* ─── Header ─────────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-bold text-2xl text-green-deep">
@@ -65,7 +66,9 @@ export default function AskBambooView() {
       <div className="animate-fade-up stagger-2">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
+          <label htmlFor="ask-search" className="sr-only">Ask Bamboo a question</label>
           <input
+            id="ask-search"
             type="text"
             placeholder={t("placeholder")}
             value={query}
@@ -73,7 +76,7 @@ export default function AskBambooView() {
             onKeyDown={(e) => {
               if (e.key === "Enter" && query.trim()) handleSubmit(query);
             }}
-            className="w-full pl-12 pr-4 py-4 rounded-lg bg-bg-subtle text-base font-body text-text-primary placeholder:text-text-tertiary border-none focus:outline-none focus:ring-2 focus:ring-green-accent/30"
+            className="w-full h-[52px] pl-12 pr-[var(--input-padding)] rounded-[var(--radius-lg)] bg-input-bg text-base font-body text-input-text placeholder:text-input-placeholder border border-input-border focus:outline-none focus:ring-2 focus:ring-border-focus/30 focus:border-border-focus transition-colors"
           />
         </div>
       </div>
@@ -81,15 +84,13 @@ export default function AskBambooView() {
       {/* ─── Suggested Queries ──────────────────── */}
       {!showResponse && (
         <div className="animate-fade-up stagger-3">
-          <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
-            {t("suggested")}
-          </p>
+          <SectionHeader title={t("suggested")} />
           <div className="flex flex-wrap gap-2">
             {suggestions.map((suggestion) => (
               <button
                 key={suggestion}
                 onClick={() => handleSubmit(suggestion)}
-                className="px-3 py-1.5 text-sm font-body text-text-secondary bg-bg-subtle rounded-full hover:bg-green-light hover:text-green-primary transition-colors cursor-pointer"
+                className="px-3 py-1.5 text-sm font-body text-text-secondary bg-bg-subtle rounded-full hover:bg-green-light hover:text-green-primary transition-colors cursor-pointer focus-ring"
               >
                 {suggestion}
               </button>
@@ -105,7 +106,7 @@ export default function AskBambooView() {
             &ldquo;{query}&rdquo;
           </p>
 
-          <Card elevated className="p-6">
+          <Card bordered className="p-6">
             <h3 className="font-display font-semibold text-lg text-text-primary">
               {t("response.title")}
             </h3>
@@ -140,7 +141,7 @@ export default function AskBambooView() {
                 >
                   <span className="text-text-secondary">{row.label}</span>
                   <span
-                    className={`font-display font-semibold ${row.accent ? "text-positive" : "text-text-primary"}`}
+                    className={`font-display font-semibold tabular-nums ${row.accent ? "text-positive" : "text-text-primary"}`}
                   >
                     {row.value}
                   </span>
@@ -148,7 +149,7 @@ export default function AskBambooView() {
               ))}
             </div>
 
-            <div className="mt-4 pt-4 border-t border-bg-subtle">
+            <div className="mt-4 pt-4 border-t border-border-divider">
               <div className="space-y-1.5 text-sm font-body text-text-secondary">
                 <p>
                   {t("response.envelopesOnPace")}{" "}
@@ -163,7 +164,7 @@ export default function AskBambooView() {
                 <p>{t("response.groceriesHot")}</p>
                 <p>
                   {t("response.netWorthLabel")}{" "}
-                  <span className="text-positive font-medium">
+                  <span className="text-positive font-medium tabular-nums">
                     {formatCurrency(monthlySummary.netWorthChange, true)} {t("response.thisMonth")}
                   </span>
                 </p>
@@ -180,7 +181,7 @@ export default function AskBambooView() {
                 <button
                   key={followUp}
                   onClick={() => handleSubmit(followUp)}
-                  className="px-3 py-1.5 text-xs font-body text-green-primary bg-green-light rounded-full hover:bg-green-glow transition-colors cursor-pointer"
+                  className="px-3 py-1.5 text-xs font-body text-green-primary bg-green-light rounded-full hover:bg-green-glow transition-colors cursor-pointer focus-ring"
                 >
                   {followUp}
                 </button>
@@ -193,7 +194,7 @@ export default function AskBambooView() {
               setShowResponse(false);
               setQuery("");
             }}
-            className="text-sm text-text-secondary font-body hover:text-green-primary transition-colors cursor-pointer"
+            className="text-sm text-text-secondary font-body hover:text-green-primary transition-colors cursor-pointer focus-ring rounded-[var(--radius-md)] px-2 py-1"
           >
             {t("clear")}
           </button>
@@ -202,9 +203,7 @@ export default function AskBambooView() {
 
       {/* ─── Recent Insights Feed ───────────────── */}
       <div className={showResponse ? "animate-fade-up" : "animate-fade-up stagger-4"}>
-        <p className="text-xs uppercase tracking-[0.05em] text-text-tertiary font-body font-medium mb-3">
-          {t("recentInsights")}
-        </p>
+        <SectionHeader title={t("recentInsights")} />
         <div className="space-y-4">
           {askBambooInsights.map((insight) => (
             <InsightCard key={insight.id} insight={insight} />

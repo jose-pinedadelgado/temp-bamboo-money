@@ -19,7 +19,7 @@ export default function GoalsView() {
   const totalTarget = goals.reduce((s, g) => s + g.target, 0);
 
   return (
-    <div className="space-y-8 animate-view-enter">
+    <div className="space-y-[var(--section-gap)] animate-view-enter">
       {/* ─── Header ─────────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-bold text-2xl text-green-deep">
@@ -27,7 +27,7 @@ export default function GoalsView() {
         </h1>
         <p className="text-sm text-text-secondary font-body mt-1">
           {t("active", { count: goals.length })} &middot;{" "}
-          <span className="font-display font-semibold text-text-primary">
+          <span className="font-display font-semibold text-text-primary tabular-nums">
             {formatCurrency(totalTarget)}
           </span>{" "}
           {t("totalTarget")}
@@ -43,6 +43,7 @@ export default function GoalsView() {
           <Card
             key={goal.id}
             hoverable
+            bordered
             className="p-6 animate-fade-up"
             style={{ animationDelay: `${(i + 1) * 60}ms` }}
           >
@@ -77,6 +78,7 @@ export default function GoalsView() {
                             height="10"
                             viewBox="0 0 14 10"
                             className="text-green-accent"
+                            aria-hidden="true"
                           >
                             <path
                               d="M1 9C3 3 7 1 13 1C9 4 5 7 1 9Z"
@@ -91,20 +93,20 @@ export default function GoalsView() {
                             />
                           </svg>
                         ) : (
-                          <div className="w-1.5 h-1.5 rounded-full bg-bg-subtle border border-sand/50" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-bg-subtle border border-border-strong/50" />
                         )}
                       </div>
                     );
                   })}
                 </div>
-                <p className="text-xs text-text-tertiary font-body mt-2">
+                <p className="text-xs text-text-tertiary font-body mt-2 tabular-nums">
                   {Math.round(percentage)}%
                 </p>
               </div>
 
               {/* Goal details */}
               <div className="flex-1 min-w-0">
-                <p className="font-display font-bold text-3xl text-green-deep">
+                <p className="font-display font-bold text-3xl text-green-deep tabular-nums">
                   {isDebt
                     ? formatCurrency(goal.target - goal.current)
                     : formatCurrency(goal.current)}
@@ -117,7 +119,8 @@ export default function GoalsView() {
 
                 <div className="mt-4 text-sm text-text-secondary font-body">
                   <p>
-                    {formatCurrency(goal.monthlyContribution)}{t("perMonth")} &middot;{" "}
+                    <span className="tabular-nums">{formatCurrency(goal.monthlyContribution)}</span>
+                    {t("perMonth")} &middot;{" "}
                     {isDebt ? t("debtFreeBy") : t("onPaceFor")}{" "}
                     <span className="text-green-accent font-medium">
                       {goal.projectedDate}
@@ -126,7 +129,7 @@ export default function GoalsView() {
                 </div>
 
                 {/* Bamboo insight */}
-                <div className="mt-4 p-3 bg-bg-subtle rounded-md">
+                <div className="mt-4 p-3 bg-bg-subtle rounded-[var(--radius-md)] border border-border-divider">
                   <p className="text-sm text-text-secondary font-body leading-relaxed italic">
                     &ldquo;{td(`${tKey}.insight`)}&rdquo;
                   </p>
@@ -138,7 +141,7 @@ export default function GoalsView() {
       })}
 
       {/* ─── Plant a New Goal ───────────────────── */}
-      <button className="w-full py-5 border-2 border-dashed border-sand/50 rounded-lg text-sm font-body text-text-secondary hover:border-green-accent hover:text-green-primary transition-colors flex items-center justify-center gap-2 cursor-pointer">
+      <button className="w-full py-5 border-2 border-dashed border-border-strong/50 rounded-lg text-sm font-body text-text-secondary hover:border-green-accent hover:text-green-primary transition-colors flex items-center justify-center gap-2 cursor-pointer focus-ring">
         <Plus className="w-4 h-4" />
         {t("plantGoal")}
       </button>

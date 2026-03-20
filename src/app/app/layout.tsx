@@ -1,6 +1,7 @@
 "use client";
 
 import { Sidebar } from "@/components/app/Sidebar";
+import { NavRail } from "@/components/app/NavRail";
 import { BottomNav } from "@/components/app/BottomNav";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
@@ -8,9 +9,8 @@ import { cn } from "@/lib/utils";
 function DarkGrainOverlay() {
   return (
     <div
-      className="fixed inset-0 z-0 pointer-events-none opacity-[0.035]"
+      className="grain-overlay fixed inset-0 z-0 pointer-events-none opacity-[0.03]"
       style={{
-        mixBlendMode: "soft-light",
         backgroundImage:
           "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
         backgroundRepeat: "repeat",
@@ -38,9 +38,21 @@ export default function AppLayout({
     >
       {theme === "dark" && <DarkGrainOverlay />}
       <Sidebar />
+      <NavRail />
       <BottomNav />
-      <main className="md:ml-[260px] pb-20 md:pb-0">
-        <div className="max-w-[1080px] mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8">
+      <main
+        id="main-content"
+        className={cn(
+          "pb-[var(--bottom-nav-height)] md:pb-0",
+          "md:ml-[var(--nav-rail-width)]"
+        )}
+      >
+        <div
+          className={cn(
+            "px-[var(--page-padding-mobile)] md:px-[var(--page-padding-desktop)]",
+            "py-6 md:py-8"
+          )}
+        >
           {children}
         </div>
       </main>

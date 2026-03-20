@@ -19,4 +19,13 @@ Errors encountered during development, including root cause analysis and resolut
 
 ---
 
+## 2026-03-15 — NavRail/Sidebar overlap at ≥1200px (Tailwind v4 arbitrary breakpoint cascade)
+**Task**: Implementing three-tier responsive nav with Sidebar (≥1200px), NavRail (768–1199px), BottomNav (<768px)
+**Error**: Both Sidebar and NavRail rendered simultaneously at ≥1200px. NavRail's `min-[1200px]:hidden` did not override `md:flex`.
+**Root Cause**: Tailwind v4 (with Turbopack/Next.js) generates arbitrary breakpoint media queries (`min-[1200px]:`) in a CSS cascade position that comes *before* standard breakpoints (`md:`). Since both `@media (min-width: 768px)` and `@media (min-width: 1200px)` match at ≥1200px, the later-appearing `md:flex` wins over the earlier-appearing `min-[1200px]:hidden`. Attempted fix with `@theme { --breakpoint-desktop: 1200px; }` also failed — Tailwind v4 with Turbopack did not generate any CSS for the custom named breakpoint.
+**Resolution**: Replaced Tailwind utility classes with explicit CSS `@media (min-width: 1200px)` rules in `globals.css` targeting `.sidebar`, `.nav-rail`, and `#main-content`. These rules have guaranteed cascade ordering since they're plain CSS.
+**Rule**: In Tailwind v4 with Turbopack, do NOT use arbitrary breakpoint values (`min-[Xpx]:`) to override standard breakpoints (`md:`, `lg:`). The CSS cascade ordering is unreliable. Use explicit `@media` rules in CSS for custom breakpoints, or verify that `@theme` breakpoint registration works in your build pipeline before relying on named custom breakpoints.
+
+---
+
 <!-- Entries will be appended below by Claude Code. Do not delete this file. -->

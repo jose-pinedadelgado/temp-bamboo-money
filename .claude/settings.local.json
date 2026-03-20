@@ -30,7 +30,14 @@
       "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm install next-intl 2>&1)",
       "Bash(ls -la /c/Users/coche/Documents/Research_Projects/0_bamboo_money/ | grep -E \"^-.*\\\\.\\(ts|js\\)$\")",
       "Bash(find /c/Users/coche/Documents/Research_Projects/0_bamboo_money/src/app -type f -name \"*.tsx\" -o -name \"*.ts\" | grep -E \"/\\(page|layout\\)\\\\.\\(tsx|ts\\)$\" | sort)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "WebSearch",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "Bash(find /c/Users/coche/Documents/Research_Projects/0_bamboo_money -type f \\\\\\( -name \"*.test.ts\" -o -name \"*.test.tsx\" -o -name \"jest.config.js\" -o -name \"vitest.config.ts\" \\\\\\) 2>/dev/null | head -20)",
+      "Bash(find /c/Users/coche/Documents/Research_Projects/0_bamboo_money/src/app -name \"layout.tsx\" -exec head -50 {} +)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\\\\.claude\\\\worktrees\\\\agent-a3c97de9\" && npm install -D vitest @vitejs/plugin-react jsdom)",
+      "Bash(git stash:*)",
+      "Bash(cd \"C:\\\\Users\\\\coche\\\\Documents\\\\Research_Projects\\\\0_bamboo_money\" && npm install -D vitest @vitejs/plugin-react jsdom)"
     ]
   }
 }

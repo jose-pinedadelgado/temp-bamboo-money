@@ -4,11 +4,13 @@ import { HTMLAttributes } from "react";
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hoverable?: boolean;
   elevated?: boolean;
+  bordered?: boolean;
 }
 
 export function Card({
   hoverable = false,
   elevated = false,
+  bordered = false,
   className,
   children,
   ...props
@@ -16,8 +18,13 @@ export function Card({
   return (
     <div
       className={cn(
-        "bg-bg-card rounded-lg p-4 relative z-10",
-        elevated ? "shadow-elevated" : "shadow-card",
+        "bg-bg-card rounded-lg relative z-10",
+        "p-[var(--card-padding)]",
+        bordered
+          ? "border border-border-default shadow-card"
+          : elevated
+            ? "shadow-elevated"
+            : "shadow-card",
         hoverable && "card-hover cursor-pointer",
         className
       )}
