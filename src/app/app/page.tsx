@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NetWorthSummary } from "@/components/app/NetWorthSummary";
 import { AccountsList } from "@/components/app/AccountsList";
 import { useDashboard, useBudgets, useTransactions } from "@/hooks/useApi";
+import { useAuth } from "@/contexts/AuthContext";
 import { getSpendingByCategory } from "@/data/helpers";
 import { formatCurrency } from "@/lib/utils";
 import { useTranslations } from "next-intl";
@@ -17,6 +18,7 @@ export default function TodayView() {
   const t = useTranslations("today");
   const td = useTranslations("data");
 
+  const { user } = useAuth();
   const { data: dash, loading, isDemo } = useDashboard();
   const { data: envelopes } = useBudgets();
   const { data: allTransactions } = useTransactions();
@@ -47,7 +49,7 @@ export default function TodayView() {
       {/* ─── Greeting ───────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-semibold text-lg text-text-primary">
-          {t("greeting", { name: dash.user.name })}
+          {t("greeting", { name: user?.username || dash.user.name })}
         </h1>
         <p className="text-sm text-text-secondary font-body">
           {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}

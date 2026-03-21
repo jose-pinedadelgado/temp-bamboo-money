@@ -3,6 +3,7 @@
 import { Sidebar } from "@/components/app/Sidebar";
 import { NavRail } from "@/components/app/NavRail";
 import { BottomNav } from "@/components/app/BottomNav";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +29,7 @@ export default function AppLayout({
   const { theme } = useTheme();
 
   return (
+    <ProtectedRoute>
     <div
       id="app-shell"
       className={cn(
@@ -57,5 +59,6 @@ export default function AppLayout({
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }

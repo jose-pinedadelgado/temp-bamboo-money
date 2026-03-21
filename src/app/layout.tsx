@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -48,7 +49,9 @@ export default async function RootLayout({
           Skip to content
         </a>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <ClientProviders>
+            {children}
+          </ClientProviders>
         </NextIntlClientProvider>
       </body>
     </html>
