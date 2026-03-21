@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/Card";
-import { goals } from "@/data/mock-data";
+import { useGoals } from "@/hooks/useApi";
 import { formatCurrency } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
@@ -15,6 +15,7 @@ const goalKeyMap: Record<string, string> = {
 export default function GoalsView() {
   const t = useTranslations("goals");
   const td = useTranslations("data.goals");
+  const { data: goals, isDemo } = useGoals();
 
   const totalTarget = goals.reduce((s, g) => s + g.target, 0);
 

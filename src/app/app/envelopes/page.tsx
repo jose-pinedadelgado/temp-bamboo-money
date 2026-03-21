@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { envelopes } from "@/data/mock-data";
+import { useBudgets } from "@/hooks/useApi";
 import { formatCurrency, getProgressPercentage } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import {
@@ -39,6 +39,7 @@ const iconMap: Record<string, LucideIcon> = {
 export default function EnvelopesView() {
   const t = useTranslations("envelopes");
   const td = useTranslations("data");
+  const { data: envelopes, isDemo } = useBudgets();
 
   const totalRemaining = envelopes.reduce(
     (sum, e) => sum + Math.max(e.budgeted - e.spent, 0),

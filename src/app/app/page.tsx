@@ -6,9 +6,8 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NetWorthSummary } from "@/components/app/NetWorthSummary";
 import { AccountsList } from "@/components/app/AccountsList";
-import { envelopes, upcomingBills } from "@/data/mock-data";
-import { transactions } from "@/data/transactions";
-import { getRecentTransactions, getSpendingByCategory } from "@/data/helpers";
+import { useDashboard, useBudgets, useTransactions } from "@/hooks/useApi";
+import { getSpendingByCategory } from "@/data/helpers";
 import { formatCurrency } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { ChevronRight } from "lucide-react";
@@ -18,12 +17,17 @@ export default function TodayView() {
   const t = useTranslations("today");
   const td = useTranslations("data");
 
+  const { data: dash, loading, isDemo } = useDashboard();
+  const { data: envelopes } = useBudgets();
+  const { data: allTransactions } = useTransactions();
+
   const activeEnvelopes = envelopes
     .filter((e) => e.group !== "growth" && e.id !== "rent")
     .slice(0, 5);
 
-  const recentTxns = getRecentTransactions(transactions, 5);
-  const spendingByCategory = getSpendingByCategory(transactions, "2026-03").slice(0, 5);
+  const recentTxns = dash.recentTransactions;
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  const spendingByCategory = getSpendingByCategory(allTransactions, currentMonth).slice(0, 5);
 
   const bambooInsight = {
     id: "today-insight",
@@ -33,13 +37,20 @@ export default function TodayView() {
 
   return (
     <div className="space-y-[var(--section-gap)] animate-view-enter">
+      {/* ─── Demo Mode Indicator ────────────────── */}
+      {isDemo && (
+        <div className="text-xs text-text-tertiary font-body bg-bg-subtle rounded-[var(--radius-md)] px-3 py-1.5 text-center">
+          Demo mode — showing sample data
+        </div>
+      )}
+
       {/* ─── Greeting ───────────────────────────── */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-semibold text-lg text-text-primary">
-          {t("greeting", { name: "Jose" })}
+          {t("greeting", { name: dash.user.name })}
         </h1>
         <p className="text-sm text-text-secondary font-body">
-          March 12, 2026
+          {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
         </p>
       </div>
 
@@ -136,7 +147,7 @@ export default function TodayView() {
         <SectionHeader title={t("upcoming.label")} />
         <Card bordered>
           <div className="divide-y divide-border-divider">
-            {upcomingBills.map((bill) => (
+            {dash.upcomingBills.map((bill) => (
               <div
                 key={bill.id}
                 className="flex items-center justify-between min-h-[var(--row-min-height)] py-2.5 first:pt-0 last:pb-0"
