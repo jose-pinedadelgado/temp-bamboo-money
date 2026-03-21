@@ -122,7 +122,7 @@ export default function TodayView() {
                 className="min-w-[140px] flex-shrink-0 p-3"
               >
                 <p className="font-body font-medium text-sm text-text-primary truncate">
-                  {td(`envelopes.${env.id}`)}
+                  {env.name}
                 </p>
                 <p className="font-display font-semibold text-lg text-green-deep mt-1 tabular-nums">
                   {formatCurrency(remaining)}

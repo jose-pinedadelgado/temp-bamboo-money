@@ -50,7 +50,7 @@ export default function GoalsView() {
           >
             {/* Label */}
             <p className="text-xs uppercase tracking-[0.05em] text-green-accent font-body font-semibold">
-              {td(`${tKey}.name`)}
+              {goal.name}
             </p>
 
             <div className="flex gap-6 mt-4">
@@ -132,7 +132,7 @@ export default function GoalsView() {
                 {/* Bamboo insight */}
                 <div className="mt-4 p-3 bg-bg-subtle rounded-[var(--radius-md)] border border-border-divider">
                   <p className="text-sm text-text-secondary font-body leading-relaxed italic">
-                    &ldquo;{td(`${tKey}.insight`)}&rdquo;
+                    &ldquo;{goal.insight}&rdquo;
                   </p>
                 </div>
               </div>

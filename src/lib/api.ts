@@ -4,7 +4,9 @@
  * All responses are raw API shapes — use adapters.ts to convert to React types.
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api";
+// Use same-origin proxy (/api → Django) to avoid cross-origin cookie issues
+// Next.js rewrites /api/* to Django backend (see next.config.ts)
+const API_BASE = "/api";
 
 // ── Raw API response types (match Django schemas.py) ─────────────
 

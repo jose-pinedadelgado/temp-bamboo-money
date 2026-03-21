@@ -102,7 +102,7 @@ export default function EnvelopesView() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-body font-medium text-sm text-text-primary">
-                          {td(`envelopes.${env.id}`)}
+                          {env.name}
                         </p>
 
                         {isGrowth ? (
@@ -115,7 +115,7 @@ export default function EnvelopesView() {
                             </p>
                             {env.paceNote && (
                               <p className="text-xs text-green-accent font-body mt-1">
-                                {td(`paceNotes.${env.id}`)}
+                                {env.paceNote}
                               </p>
                             )}
                           </div>
