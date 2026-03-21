@@ -1,114 +1,129 @@
 # Bamboo Money — Capability Coverage Map
 
-Last updated: 2026-03-20
+Last updated: 2026-03-20 (Day 1 complete)
 
 ## Status Legend
-- ✅ **Active** — API exists, React uses it
-- 🟡 **Available** — API exists, React doesn't use it yet (intentional backlog)
-- ⚪ **Parked** — Capability exists in Django, not migrated to API (may never be)
+- ✅ **Active** — API endpoint built and tested
+- ⚪ **Parked** — Exists in Django, intentionally not exposed in API yet
 - ❌ **Orphaned** — Dead code, candidate for deletion
 
 ---
 
-## Capabilities
+## ✅ Active — Powers the 4 React Pages (24 endpoints)
 
-### Core Data
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| User auth (login) | `login_view` | `POST /api/auth/login/` | Auth page | 🟡 |
-| User auth (register) | `register_view` | `POST /api/auth/register/` | Auth page | 🟡 |
-| User auth (logout) | `logout_view` | `POST /api/auth/logout/` | Nav button | 🟡 |
-| Default categories on signup | `_create_default_categories` | (internal, no API) | — | ⚪ |
+### Auth
+| Capability | Endpoint | React Consumer | Description |
+|-----------|----------|---------------|-------------|
+| Login | `POST /api/auth/login/` | Auth page | Authenticates user, starts session |
+| Register | `POST /api/auth/register/` | Auth page | Creates account + default budget categories |
+| Logout | `POST /api/auth/logout/` | Nav button | Ends session |
+| Current user | `GET /api/auth/me/` | App layout | Returns logged-in user info for header/nav |
 
-### Transactions
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| List transactions (filtered) | `transaction_list`, `_get_filtered_transactions` | `GET /api/transactions/` | Today (recent), future Transactions page | 🟡 |
-| Add transaction | `transaction_add` | `POST /api/transactions/` | — | 🟡 |
-| Edit transaction | `transaction_edit` | `PUT /api/transactions/{id}/` | — | 🟡 |
-| Delete transaction | `transaction_delete` | `DELETE /api/transactions/{id}/` | — | 🟡 |
-| Quick-change category | `transaction_update_category` | `PATCH /api/transactions/{id}/category/` | — | 🟡 |
-| Export to Excel | `transaction_export` | `GET /api/transactions/export/` | — | ⚪ |
+### Today Page
+| Capability | Endpoint | Description |
+|-----------|----------|-------------|
+| Dashboard summary | `GET /api/dashboard/` | Aggregated view: net worth, budget health, 5 recent transactions, unread alerts, upcoming bills |
+| List accounts | `GET /api/accounts/` | Financial accounts grouped by type (checking, savings, credit, etc.) |
+| List alerts | `GET /api/alerts/` | Unread budget alerts (overspend warnings, goal milestones) |
+| Dismiss alert | `POST /api/alerts/{id}/dismiss/` | Mark single alert as read |
+| Dismiss all alerts | `POST /api/alerts/dismiss-all/` | Clear all notifications |
+| List recurring | `GET /api/recurring/` | Confirmed active recurring bills for "upcoming bills" section |
 
-### CSV Import
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| Upload CSV | `csv_upload` | `POST /api/import/upload/` | — | ⚪ |
-| Preview import | `csv_preview` | `POST /api/import/preview/` | — | ⚪ |
-| Confirm import | `csv_confirm` | `POST /api/import/confirm/` | — | ⚪ |
+### Transactions (Today page recent activity + future dedicated page)
+| Capability | Endpoint | Description |
+|-----------|----------|-------------|
+| List transactions | `GET /api/transactions/?date_from=&date_to=&category=&search=` | Filtered list — powers recent activity and eventual full transaction view |
+| Create transaction | `POST /api/transactions/` | Add spending/income manually |
+| Edit transaction | `PUT /api/transactions/{id}/` | Fix mistakes, recategorize |
+| Delete transaction | `DELETE /api/transactions/{id}/` | Remove accidental entries |
+| Quick category change | `PATCH /api/transactions/{id}/category/` | Fast recategorization without full edit |
 
-### Budgets (Envelopes)
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| List budgets with spending | `budget_list` | `GET /api/budgets/` | Envelopes page | 🟡 |
-| Add budget category | `budget_add` | `POST /api/budgets/` | — | 🟡 |
-| Edit budget | `budget_edit` | `PUT /api/budgets/{id}/` | — | 🟡 |
-| Delete budget | `budget_delete` | `DELETE /api/budgets/{id}/` | — | 🟡 |
-| Rollover calculation | `calculate_rollovers` mgmt cmd | (computed in GET response) | Envelopes page | 🟡 |
-| Budget alerts | `_check_budget_alerts` | `GET /api/alerts/` | Today page | 🟡 |
+### Envelopes Page
+| Capability | Endpoint | Description |
+|-----------|----------|-------------|
+| List budgets | `GET /api/budgets/` | All categories with computed `spent_this_month`, `remaining`, `percent_used`, `rollover_amount`, `effective_limit` |
+| Create budget | `POST /api/budgets/` | Add new envelope/category |
+| Edit budget | `PUT /api/budgets/{id}/` | Change limit, toggle rollover, rename |
+| Delete budget | `DELETE /api/budgets/{id}/` | Remove unused category |
 
-### Savings Goals
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| List goals | `goals_list` | `GET /api/goals/` | Goals page | 🟡 |
-| Add goal | `goal_add` | `POST /api/goals/` | Goals page | 🟡 |
-| Goal detail + contributions | `goal_detail` | `GET /api/goals/{id}/` | Goals page | 🟡 |
-| Delete goal | `goal_delete` | `DELETE /api/goals/{id}/` | — | 🟡 |
+### Goals Page
+| Capability | Endpoint | Description |
+|-----------|----------|-------------|
+| List goals | `GET /api/goals/` | All savings goals with `progress_percent` calculated |
+| Create goal | `POST /api/goals/` | Set a new savings target with deadline |
+| Goal detail | `GET /api/goals/{id}/` | Full detail with contribution history |
+| Delete goal | `DELETE /api/goals/{id}/` | Remove completed/abandoned goal |
+| Contribute | `POST /api/goals/{id}/contribute/` | Add money toward a goal — the primary Goals action |
 
-### Net Worth
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| Net worth summary | `_calc_net_worth`, `networth` | `GET /api/networth/` | Today page (summary) | 🟡 |
-| Net worth history | `NetWorthSnapshot`, `NetWorthEntryHistory` | `GET /api/networth/history/` | — | ⚪ |
-| Add/edit/delete entries | `networth_add/edit/delete` | CRUD `/api/networth/entries/` | — | ⚪ |
-| Export net worth | `networth_export_sheets/csv` | — | — | ⚪ |
-
-### Recurring Transactions
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| List recurring | `recurring_list` | `GET /api/recurring/` | Today (upcoming bills) | 🟡 |
-| AI detect recurring | `recurring_detect` | `POST /api/recurring/detect/` | — | ⚪ |
-| Confirm/toggle/delete | `recurring_confirm/toggle/delete` | PUT/DELETE endpoints | — | ⚪ |
-
-### Categorization Rules
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| List rules | `rules_list` | — | — | ⚪ |
-| CRUD rules | `rule_add/edit/delete` | — | — | ⚪ |
-| Apply all rules | `rules_apply_all` | — | — | ⚪ |
-| Create rule from transaction | `create_rule_from_transaction` | — | — | ⚪ |
-
-### AI / Chatbot
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| Chat message | `chatbot_message`, `process_message` | `POST /api/chat/` | Ask Bamboo page | 🟡 |
-| Build financial context | `_build_context` | (internal, feeds chat) | — | 🟡 |
-
-### Cash Flow
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| Sankey diagram data | `cashflow_view/data` | — | — | ⚪ |
-
-### Alerts
-| Capability | Django Source | API Endpoint | React Consumer | Status |
-|-----------|-------------|-------------|---------------|--------|
-| Dismiss alert | `alert_dismiss` | `POST /api/alerts/{id}/dismiss/` | — | ⚪ |
-| Dismiss all | `alert_dismiss_all` | `POST /api/alerts/dismiss-all/` | — | ⚪ |
+### Ask Bamboo Page
+| Capability | Endpoint | Description |
+|-----------|----------|-------------|
+| Chat | `POST /api/chat/` | Send message → LLM builds financial context from user's data → returns structured insight |
 
 ---
 
-## Summary
+## ⚪ Parked — Not Needed for React v1 (16 capabilities)
 
-| Status | Count | Notes |
-|--------|-------|-------|
-| ✅ Active | 0 | Nothing connected yet |
-| 🟡 Available | 18 | Day 1 API targets |
-| ⚪ Parked | 16 | Will not build API yet — revisit later |
-| ❌ Orphaned | 0 | Clean so far |
+### CSV Import (3) — *"Import is messy UX. React v1 focuses on manual entry."*
+| Capability | Django Source | Why Parked |
+|-----------|-------------|-----------|
+| CSV upload | `csv_upload` | Requires column mapping UI, bank format detection. Complex wizard that doesn't fit "calm" philosophy. Add in v2 with a proper import experience. |
+| CSV preview | `csv_preview` | Part of import flow |
+| CSV confirm | `csv_confirm` | Part of import flow |
+
+### Export (2) — *"Users aren't coming to Bamboo to make spreadsheets."*
+| Capability | Django Source | Why Parked |
+|-----------|-------------|-----------|
+| Transaction export (Excel) | `transaction_export` | Nice-to-have. Not core value prop. v2+. |
+| Net worth export | `networth_export_sheets/csv` | Same |
+
+### Net Worth Management (4) — *"No dedicated page designed yet."*
+| Capability | Django Source | Why Parked |
+|-----------|-------------|-----------|
+| Net worth history chart | `NetWorthSnapshot`, `NetWorthEntryHistory` | Today page shows current total. Historical view requires a new page. v2. |
+| Add net worth entry | `networth_add` | Requires net worth management page — not designed yet |
+| Edit net worth entry | `networth_edit` | Same |
+| Delete net worth entry | `networth_delete` | Same |
+
+### Recurring Management (3) — *"Should surface automatically, not as a settings page."*
+| Capability | Django Source | Why Parked |
+|-----------|-------------|-----------|
+| AI detect recurring | `recurring_detect` | Should run as background job, not user-triggered button. Results surface in Today page naturally. |
+| Confirm recurring | `recurring_confirm` | Part of recurring management flow |
+| Toggle/delete recurring | `recurring_toggle/delete` | Same |
+
+### Categorization Rules (3) — *"Intelligence over labor — should be invisible."*
+| Capability | Django Source | Why Parked |
+|-----------|-------------|-----------|
+| List rules | `rules_list` | Power-user settings feature. Auto-categorization should happen transparently. |
+| CRUD rules | `rule_add/edit/delete` | Settings page, not core UX |
+| Apply all rules | `rules_apply_all` | Bulk operation — belongs in background, not UI |
+
+### Cash Flow (1) — *"Sankey diagrams are confusing, not calm."*
+| Capability | Django Source | Why Parked |
+|-----------|-------------|-----------|
+| Cash flow Sankey | `cashflow_view/data` | Complex visualization most users won't understand. Doesn't align with "clarity over completeness." Maybe v3. |
+
+---
+
+## Day 1 Test Results (2026-03-20)
+
+```
+Auth:         ✅ Login → session → dashboard (tested)
+Dashboard:    ✅ Net worth $470K, 12 budgets, 5 recent txns
+Transactions: ✅ 50 returned with merchant/amount/date
+Budgets:      ✅ 12 categories, computed spending fields
+Goals:        ✅ 3 goals, progress % (70.2% Emergency Fund)
+Accounts:     ✅ 6 accounts
+Recurring:    ✅ 0 (none seeded, endpoint works)
+Alerts:       ✅ 0 (none active, endpoint works)
+Chat:         ✅ Built (needs OpenAI key for live test)
+Swagger docs: ✅ http://localhost:8002/api/docs
+```
 
 ---
 
 ## Review Schedule
-- **Weekly** during integration: promote ⚪→🟡 or 🟡→✅ as we connect things
-- **After integration complete**: anything still ⚪ for 30+ days gets discussed — keep or prune
+- **Weekly** during integration: promote ⚪→✅ as features are built
+- **After v1 launch**: anything still ⚪ for 30+ days gets discussed — keep or prune
 - **Quarterly**: full audit — any ❌ Orphaned gets deleted
